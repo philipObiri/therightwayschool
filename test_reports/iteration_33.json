@@ -1,0 +1,82 @@
+{
+  "summary": "Iteration 33: Tested Working Paper (WP) metrics in Activity Score feature. Fixed critical bug in teacher-full-review endpoint where wp_docs and wp_audit were not being passed to compute_activity_scores(). All backend and frontend tests PASSED after fix.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Backend: GET /api/monitoring/teacher-full-review/{teacher_id} returns activity_metrics.breakdown with 9 metrics (including wp_documents and wp_actions)",
+    "Backend: GET /api/monitoring/teacher-full-review/{teacher_id} returns daily_metrics.breakdown with 8 metrics (including wp_documents and wp_actions)",
+    "Backend: Monthly weights sum to 100 (15+12+10+8+15+8+7+15+10=100)",
+    "Backend: Daily weights sum to 100 (15+12+8+8+15+7+20+15=100)",
+    "Backend: wp_documents monthly has weight=15, count_30d, total fields",
+    "Backend: wp_documents daily has weight=20, count_today, target=2 fields",
+    "Backend: wp_actions monthly has weight=10, count_30d, total fields",
+    "Backend: wp_actions daily has weight=15, count_today, target=5 fields",
+    "Backend: GET /api/monitoring/my-review returns WP metrics in both monthly and daily breakdowns",
+    "Frontend SuperAdmin: Daily Score tab shows 8 metric cards including 'Working Paper Docs' and 'Working Paper Actions'",
+    "Frontend SuperAdmin: Monthly Score tab shows 9 metric cards including 'Working Paper Docs' and 'Working Paper Actions'",
+    "Frontend Teacher: Daily Score tab shows 8 metric cards including WP metrics with correct weights (20%, 15%)",
+    "Frontend Teacher: Monthly Score tab shows 9 metric cards including WP metrics with correct weights (15%, 10%)"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_iteration33_wp_metrics.py",
+    "/app/test_reports/pytest/pytest_results_iter33.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "FIXED: teacher-full-review endpoint was missing wp_docs and wp_audit parameters in compute_activity_scores() call (line 755-757)",
+    "my-review endpoint correctly passes wp_docs and wp_audit to compute_activity_scores()",
+    "Monthly weights correctly sum to 100: lessons=15, assignments=12, plans=10, files=8, clock_hours=15, grading=8, platform_activity=7, wp_documents=15, wp_actions=10",
+    "Daily weights correctly sum to 100: lessons=15, assignments=12, plans=8, files=8, clock_hours=15, platform_activity=7, wp_documents=20, wp_actions=15",
+    "Frontend correctly displays WP metrics with FolderOpen and Shield icons from lucide-react"
+  ],
+  "updated_files": [
+    "/app/backend/routes/monitoring.py (fixed compute_activity_scores call to include wp_docs, wp_audit)",
+    "/app/backend/tests/test_iteration33_wp_metrics.py (new test file)"
+  ],
+  "success_rate": {
+    "backend": "100% (7/7 tests passed)",
+    "frontend": "100% (all UI features verified)"
+  },
+  "test_credentials": {
+    "SuperAdmin": "dwain@tcis.demo / admin123",
+    "Teacher": "edmund@tcis.demo / teacher123"
+  },
+  "seed_data_creation": "None - used existing teacher data",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 33 tested Working Paper metrics in Activity Score. Both monthly (9 metrics) and daily (8 metrics) breakdowns now include wp_documents and wp_actions. Monthly weights: lessons=15, assignments=12, plans=10, files=8, clock_hours=15, grading=8, platform_activity=7, wp_documents=15, wp_actions=10 (total=100). Daily weights: lessons=15, assignments=12, plans=8, files=8, clock_hours=15, platform_activity=7, wp_documents=20, wp_actions=15 (total=100). Frontend data-testids: daily-metric-wp_documents, daily-metric-wp_actions (management view), my-daily-wp_documents, my-daily-wp_actions (teacher self-view), metric-wp_documents, metric-wp_actions (monthly management), my-metric-wp_documents, my-metric-wp_actions (monthly teacher).",
+  "verified_features": {
+    "wp_metrics_in_activity_score": {
+      "description": "Working Paper documents and actions now contribute to Activity Score",
+      "monthly_metrics": {
+        "wp_documents": {"weight": 15, "fields": ["score", "count_30d", "total"]},
+        "wp_actions": {"weight": 10, "fields": ["score", "count_30d", "total"]}
+      },
+      "daily_metrics": {
+        "wp_documents": {"weight": 20, "target": 2, "fields": ["score", "count_today", "target"]},
+        "wp_actions": {"weight": 15, "target": 5, "fields": ["score", "count_today", "target"]}
+      },
+      "endpoints_tested": [
+        "GET /api/monitoring/teacher-full-review/{teacher_id}",
+        "GET /api/monitoring/my-review"
+      ],
+      "frontend_components": {
+        "MonitoringModule.jsx": "Daily Score and Monthly Score tabs show WP metric cards",
+        "MyMonitoring.jsx": "Teacher self-view shows WP metric cards in both tabs"
+      }
+    }
+  },
+  "bug_fixed": {
+    "description": "teacher-full-review endpoint was not passing wp_docs and wp_audit to compute_activity_scores()",
+    "file": "/app/backend/routes/monitoring.py",
+    "line": "755-757",
+    "fix": "Added wp_docs, wp_audit parameters to compute_activity_scores() call"
+  }
+}

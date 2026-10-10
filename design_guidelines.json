@@ -1,0 +1,109 @@
+{
+  "theme_and_archetype": {
+    "domain": "Education ERP Dashboard",
+    "theme": "Light Content with Dark Sidebar (Hybrid)",
+    "archetype": "Archetype 4 (Swiss & High-Contrast) + Archetype 5 (Jewel & Luxury)",
+    "rationale": "The locked color palette (Navy, Gold, Blue) naturally aligns with authority and luxury. We combine the rigorous functional layout of Swiss design with the material depth of Jewel tones to make it feel like a premium SaaS."
+  },
+  "colors": {
+    "brand_navy": "#1B2A4A",
+    "brand_gold": "#C5A55A",
+    "brand_blue": "#2E6CC4",
+    "sidebar_bg": "#141F36",
+    "sidebar_hover": "#1B2A4A",
+    "sidebar_active_glow": "rgba(197, 165, 90, 0.15)",
+    "content_bg": "#F8FAFC",
+    "card_bg": "#FFFFFF",
+    "border_subtle": "#E2E8F0",
+    "text_primary": "#0F172A",
+    "text_secondary": "#475569",
+    "text_on_navy": "#FFFFFF",
+    "text_on_navy_muted": "#94A3B8"
+  },
+  "typography": {
+    "headings": "Outfit, sans-serif",
+    "body": "Manrope, sans-serif",
+    "rules": {
+      "h1": "text-3xl font-semibold tracking-tight text-[#1B2A4A]",
+      "h2": "text-xl font-medium tracking-tight text-slate-800",
+      "sidebar_group": "text-[10px] uppercase tracking-[0.2em] font-semibold text-[#C5A55A]/60",
+      "body": "text-sm text-slate-600 leading-relaxed"
+    }
+  },
+  "layout_and_spacing": {
+    "philosophy": "Move from edge-to-edge 'bootstrap' layout to a detached, floating component model.",
+    "sidebar": "w-64 fixed inset-y-0 left-0 z-50",
+    "content_area": "pl-64 flex flex-col min-h-screen bg-[#F8FAFC]",
+    "container_padding": "p-8",
+    "bento_grid": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6",
+    "card_padding": "p-6"
+  },
+  "components": {
+    "sidebar": {
+      "description": "Premium dark navy sidebar with floating pill links and active state glows.",
+      "container": "bg-[#141F36] border-r border-[#1B2A4A] h-full flex flex-col py-6 shadow-2xl",
+      "group_heading": "px-6 mb-2 mt-6 text-[10px] font-bold uppercase tracking-[0.2em] text-[#C5A55A]/60",
+      "item_default": "mx-3 px-3 py-2.5 rounded-lg flex items-center gap-3 text-slate-400 hover:text-white hover:bg-[#1B2A4A] transition-all duration-200",
+      "item_active": "mx-3 px-3 py-2.5 rounded-lg flex items-center gap-3 text-white bg-gradient-to-r from-[#2E6CC4]/20 to-transparent border-l-2 border-[#C5A55A] shadow-[inset_4px_0_12px_rgba(197,165,90,0.1)]",
+      "icon_size": "w-5 h-5"
+    },
+    "topbar": {
+      "description": "Crystal glass topbar that floats over the content background.",
+      "container": "sticky top-0 z-40 h-16 flex items-center justify-between px-8 bg-white/70 backdrop-blur-xl border-b border-slate-200/50 shadow-[0_4px_24px_-8px_rgba(27,42,74,0.06)]",
+      "search": "bg-slate-100/50 border border-slate-200 rounded-full px-4 py-2 text-sm w-64 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#2E6CC4]/30 transition-all",
+      "icons": "p-2 rounded-full text-slate-500 hover:bg-slate-100 hover:text-[#1B2A4A] transition-colors"
+    },
+    "stat_cards": {
+      "description": "Neumorphic-crisp cards with 'tracing beam' accent on hover.",
+      "container": "bg-white rounded-xl border border-slate-200/60 p-6 shadow-[0_2px_10px_rgba(27,42,74,0.02)] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(27,42,74,0.08)] hover:-translate-y-1 relative overflow-hidden group",
+      "hover_accent": "absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#2E6CC4] to-[#C5A55A] opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+      "icon_wrapper": "w-10 h-10 rounded-lg bg-[#F8FAFC] flex items-center justify-center text-[#2E6CC4] border border-slate-100 mb-4",
+      "value": "text-3xl font-bold tracking-tight text-[#1B2A4A]",
+      "label": "text-sm text-slate-500 font-medium mt-1"
+    },
+    "hero_banner": {
+      "description": "Greeting area at the top of the dashboard for admins.",
+      "container": "relative w-full rounded-2xl bg-[#1B2A4A] overflow-hidden p-8 mb-8 shadow-lg",
+      "overlay": "absolute inset-0 bg-gradient-to-r from-[#1B2A4A] via-[#1B2A4A]/90 to-transparent z-10",
+      "image": "absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen right-0",
+      "content": "relative z-20 flex flex-col max-w-xl",
+      "title": "text-3xl font-bold text-white mb-2",
+      "subtitle": "text-[#C5A55A] text-lg font-medium tracking-wide",
+      "date": "text-slate-300 mt-4 text-sm flex items-center gap-2"
+    },
+    "tables": {
+      "description": "Modern, breathable data tables removing the standard rigid borders.",
+      "container": "bg-white rounded-xl border border-slate-200/60 shadow-[0_2px_10px_rgba(27,42,74,0.02)] overflow-hidden",
+      "header_row": "bg-slate-50/50 border-b border-slate-100",
+      "header_cell": "px-6 py-4 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500 text-left",
+      "body_row": "border-b border-slate-50 hover:bg-slate-50/50 transition-colors duration-150 group",
+      "body_cell": "px-6 py-4 text-sm text-slate-700",
+      "status_badge": "px-2.5 py-1 rounded-full text-xs font-medium border"
+    }
+  },
+  "motion": {
+    "hover_states": "All interactive elements MUST have a transform (-translate-y-[2px]) and shadow-lg bump on hover.",
+    "page_transitions": "Staggered fade-in for dashboard bento grid items (e.g., framer-motion delay 0.1s steps).",
+    "active_states": "Sidebar items should scale down slightly (scale-[0.98]) on active press."
+  },
+  "accessibility_and_testing": {
+    "focus_rings": "focus:outline-none focus:ring-2 focus:ring-[#2E6CC4]/40 focus:ring-offset-2",
+    "data_testids": "MANDATORY. Sidebar links MUST have data-testid='sidebar-link-{name}', Cards MUST have data-testid='stat-card-{type}'."
+  },
+  "media": {
+    "hero_banner_bg": {
+      "url": "https://images.unsplash.com/photo-1552083974-186346191183?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTF8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGJsdWUlMjBnb2xkfGVufDB8fHx8MTc3NjAxMDQ3NHww&ixlib=rb-4.1.0&q=85",
+      "alt": "Abstract Blue and Gold Paint Splash",
+      "usage": "Use as an absolute positioned image in the admin hero banner with opacity-20 and mix-blend-screen under the dark navy gradient to create a luxurious texture."
+    }
+  },
+  "instructions_to_main_agent": [
+    "1. Replace standard flat Shadcn/UI sidebar with the custom dark navy floating pill design defined in components.sidebar.",
+    "2. Implement the Crystal Glass Topbar that stays fixed and overlaps the #F8FAFC content background.",
+    "3. Build a Hero Banner component at the top of the admin page using the provided Unsplash image as a subtle textured background overlay.",
+    "4. Refactor all Stat Cards to remove generic borders and instead use the 'tracing beam' top border hover effect with the Neumorphic crisp drop shadow.",
+    "5. Use Outfit font for headings and Manrope for body text (import via Google Fonts).",
+    "6. Keep the strictly locked color palette but utilize opacity layers (e.g., #2E6CC4/20) for active states to create depth without breaking the palette.",
+    "7. Ensure generous spacing (p-8 container, gap-6 grid) and NEVER center-align table contents or dashboard widgets, keep them structured and left-aligned."
+  ]
+}

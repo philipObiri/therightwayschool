@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>School Management Platform Proposal - The RightWay Centre of Learning</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#f8fafc;color:#1e293b;font-size:14px;line-height:1.7}
+  .page{max-width:900px;margin:0 auto;background:#fff}
+
+  /* ── COVER ── */
+  .cover{background:linear-gradient(135deg,#044875 0%,#065d94 50%,#0a7ac4 100%);color:#fff;padding:80px 60px;min-height:420px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+  .cover::before{content:'';position:absolute;top:-60px;right:-60px;width:350px;height:350px;border-radius:50%;background:rgba(255,255,255,0.05)}
+  .cover::after{content:'';position:absolute;bottom:-80px;left:-40px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,0.04)}
+  .cover-logo{display:flex;align-items:center;gap:12px;margin-bottom:48px}
+  .logo-box{width:44px;height:44px;background:rgba(248,217,4,0.25);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;border:1px solid rgba(248,217,4,0.4)}
+  .logo-text{font-size:20px;font-weight:700;letter-spacing:-0.5px}
+  .cover-badge{display:inline-block;background:rgba(248,217,4,0.2);border:1px solid rgba(248,217,4,0.5);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;margin-bottom:20px;letter-spacing:0.5px;width:fit-content;color:#f8d904}
+  .cover h1{font-size:38px;font-weight:800;line-height:1.15;margin-bottom:12px;letter-spacing:-1px}
+  .cover h1 span{color:#f8d904}
+  .cover-sub{font-size:16px;color:rgba(255,255,255,0.8);max-width:520px;margin-bottom:40px}
+  .cover-meta{display:flex;gap:40px;flex-wrap:wrap}
+  .cover-meta-item label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.55);margin-bottom:3px}
+  .cover-meta-item span{font-size:14px;font-weight:600}
+  .cover-ref{position:absolute;bottom:30px;right:60px;font-size:11px;color:rgba(248,217,4,0.7);letter-spacing:1px;font-weight:600}
+  .confidential-stripe{background:rgba(248,217,4,0.15);border-top:2px solid rgba(248,217,4,0.4);border-bottom:2px solid rgba(248,217,4,0.4);padding:8px 60px;font-size:11px;font-weight:700;letter-spacing:2px;color:#f8d904;text-align:center;text-transform:uppercase}
+
+  /* ── SECTIONS ── */
+  .section{padding:28px 60px;border-bottom:none}
+  .section+.section{border-top:1px solid #f0f4f8}
+  .section:last-child{border-bottom:none}
+  .section-tag{display:inline-flex;align-items:center;gap:6px;background:#e8f4fb;color:#044875;border-radius:6px;padding:4px 12px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px}
+  .section-tag .dot{width:6px;height:6px;background:#044875;border-radius:50%}
+  h2{font-size:24px;font-weight:800;color:#0f172a;margin-bottom:8px;letter-spacing:-0.5px}
+  h3{font-size:16px;font-weight:700;color:#1e293b;margin:16px 0 8px}
+  h4{font-size:13px;font-weight:600;color:#475569;margin:10px 0 5px;text-transform:uppercase;letter-spacing:0.5px}
+  p{color:#475569;margin-bottom:10px}
+  .lead{font-size:15px;color:#334155;line-height:1.8;margin-bottom:0}
+
+  /* ── DIVIDER ── */
+  .divider{height:3px;background:linear-gradient(90deg,#044875,#c1e5e6,transparent);border-radius:2px;margin-bottom:16px}
+
+  /* ── CARDS GRID ── */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:16px 0}
+  .card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+  .card-icon{font-size:22px;margin-bottom:6px}
+  .card h4{font-size:12px;font-weight:700;color:#1e293b;text-transform:none;letter-spacing:0;margin:0 0 4px}
+  .card p{font-size:12px;color:#64748b;margin:0}
+  .card.highlight{background:#e8f4fb;border-color:#a8d5e2;border-top:3px solid #044875}
+  .card.highlight h4{color:#044875}
+
+  /* ── 2-COL / 3-COL ── */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:14px 0}
+  .three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:14px 0}
+
+  /* ── TABLE ── */
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}
+  thead tr{background:#044875;color:#fff}
+  thead th{padding:10px 14px;text-align:left;font-weight:600;font-size:12px;letter-spacing:0.3px}
+  tbody tr:nth-child(even){background:#f8fafc}
+  tbody td{padding:9px 14px;border-bottom:1px solid #f1f5f9;color:#334155}
+  tbody td:first-child{font-weight:600;color:#1e293b}
+  tfoot tr{background:#044875;color:#fff}
+  tfoot td{padding:12px 14px;font-weight:700;font-size:14px}
+  .td-right{text-align:right}
+  .td-center{text-align:center}
+  .td-green{color:#059669;font-weight:700}
+  .td-bold{font-weight:700;color:#1e293b}
+
+  /* ── BADGE ── */
+  .badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600}
+  .badge-blue{background:#e8f4fb;color:#044875}
+  .badge-green{background:#d1fae5;color:#065f46}
+  .badge-yellow{background:#fef9c3;color:#713f12}
+  .badge-teal{background:#c1e5e6;color:#0f5460}
+
+  /* ── TIMELINE ── */
+  .timeline{margin:16px 0}
+  .tl-item{display:flex;gap:20px;margin-bottom:0}
+  .tl-left{display:flex;flex-direction:column;align-items:center;width:40px;flex-shrink:0}
+  .tl-circle{width:32px;height:32px;border-radius:50%;background:#044875;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
+  .tl-line{width:2px;flex:1;background:#e2e8f0;min-height:16px}
+  .tl-item:last-child .tl-line{display:none}
+  .tl-right{padding:0 0 18px 0;flex:1}
+  .tl-header{display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+  .tl-title{font-weight:700;color:#1e293b;font-size:13px}
+  .tl-period{font-size:11px;color:#64748b;background:#f1f5f9;padding:2px 8px;border-radius:100px}
+  .tl-tasks{margin-top:4px;padding-left:14px}
+  .tl-tasks li{font-size:12px;color:#64748b;margin-bottom:2px}
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box{background:linear-gradient(135deg,#e8f4fb,#c1e5e6);border:1px solid #a8d5e2;border-radius:12px;padding:20px;margin:16px 0}
+  .highlight-box.green{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#86efac}
+  .highlight-box.amber{background:linear-gradient(135deg,#fffbeb,#fef9c3);border-color:#fcd34d}
+  .highlight-box.gold{background:linear-gradient(135deg,#fef9c3,#fef3c7);border-color:#f8d904;border-left:4px solid #f8d904}
+  .highlight-box.dark{background:linear-gradient(135deg,#044875,#065d94);color:#fff}
+  .highlight-box.dark p,.highlight-box.dark h3,.highlight-box.dark li{color:rgba(255,255,255,0.9)}
+  .highlight-box h3{margin-top:0;font-size:15px}
+
+  /* ── CHECKLIST ── */
+  .checklist{list-style:none;padding:0;margin:8px 0}
+  .checklist li{display:flex;align-items:flex-start;gap:8px;padding:3px 0;font-size:13px;color:#475569}
+  .checklist li::before{content:'✓';color:#059669;font-weight:700;flex-shrink:0;margin-top:1px}
+  .checklist li.cross::before{content:'✗';color:#dc2626}
+
+  /* ── PRICING ── */
+  .price-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f1f5f9}
+  .price-row:last-child{border-bottom:none}
+  .price-label{font-size:13px;color:#475569}
+  .price-label span{display:block;font-size:11px;color:#94a3b8;margin-top:1px}
+  .price-amount{font-size:15px;font-weight:700;color:#1e293b}
+  .price-total{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:#044875;border-radius:10px;margin-top:14px;color:#fff}
+  .price-total .label{font-size:13px;color:rgba(255,255,255,0.7)}
+  .price-total .amount{font-size:24px;font-weight:800;color:#f8d904}
+
+  /* ── SIGNATURE ── */
+  .sig-box{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:20px}
+  .sig-item{border-top:2px solid #e2e8f0;padding-top:14px}
+  .sig-item .name{font-weight:700;font-size:14px;color:#1e293b;margin-bottom:2px}
+  .sig-item .title{font-size:12px;color:#64748b}
+  .sig-field{margin-top:12px}
+  .sig-field label{display:block;font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px}
+  .sig-blank{width:100%;height:26px;border:1.5px solid #e2e8f0;border-radius:7px;background:#fff;box-sizing:border-box}
+  .sig-check{margin-top:12px;display:flex;align-items:center;gap:10px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;padding:10px 14px;min-height:44px}
+  .sig-check-box{width:18px;height:18px;border:1.5px solid #044875;border-radius:3px;background:#fff;flex-shrink:0}
+  .sig-check label{font-size:12px;color:#475569;line-height:1.4}
+
+  /* ── FOOTER ── */
+  .doc-footer{background:#044875;color:rgba(255,255,255,0.7);padding:20px 60px;font-size:11px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+  .doc-footer .footer-gold{color:#f8d904;font-weight:600}
+
+  /* ── STAT ROW ── */
+  .stat-row{display:flex;gap:0;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin:14px 0}
+  .stat-item{flex:1;padding:16px;text-align:center;border-right:1px solid #e2e8f0}
+  .stat-item:last-child{border-right:none}
+  .stat-value{font-size:24px;font-weight:800;color:#044875}
+  .stat-label{font-size:11px;color:#64748b;margin-top:2px}
+
+  /* ── ROI GRID ── */
+  .roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+  .roi-card{border:1px solid #e2e8f0;border-radius:10px;padding:14px}
+  .roi-card .roi-title{font-size:11px;text-transform:uppercase;letter-spacing:0.8px;color:#94a3b8;margin-bottom:4px}
+  .roi-card .roi-value{font-size:20px;font-weight:800;color:#1e293b}
+  .roi-card .roi-sub{font-size:12px;color:#64748b;margin-top:2px}
+  .roi-card.positive .roi-value{color:#059669}
+  .roi-card.navy .roi-value{color:#044875}
+
+  /* ── PAYMENT SCHEDULE ── */
+  .pay-schedule{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+  .pay-card{border-radius:10px;padding:14px;text-align:center;border:1px solid #e2e8f0}
+  .pay-card.p1{background:linear-gradient(135deg,#044875,#065d94);color:#fff}
+  .pay-card.p2{background:linear-gradient(135deg,#e8f4fb,#c1e5e6);border-color:#a8d5e2}
+  .pay-card.p3{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#86efac}
+  .pay-card .pay-pct{font-size:26px;font-weight:800;margin-bottom:3px}
+  .pay-card.p1 .pay-pct{color:#f8d904}
+  .pay-card.p2 .pay-pct{color:#044875}
+  .pay-card.p3 .pay-pct{color:#059669}
+  .pay-card .pay-amount{font-size:13px;font-weight:700;margin-bottom:3px}
+  .pay-card.p1 .pay-amount{color:rgba(255,255,255,0.9)}
+  .pay-card .pay-label{font-size:11px;color:#64748b}
+  .pay-card.p1 .pay-label{color:rgba(255,255,255,0.6)}
+
+  /* ── PAGE-BREAK SAFETY ── */
+  .card,.highlight-box,.tl-item,.stat-row,.sig-box,.sig-item,
+  .pay-card,.roi-card,.pay-schedule,.roi-grid{break-inside:avoid;page-break-inside:avoid}
+  .cards,.two-col,.three-col{break-inside:avoid;page-break-inside:avoid}
+  table{break-inside:auto;page-break-inside:auto}
+  tr{break-inside:avoid;page-break-inside:avoid}
+  thead{display:table-header-group}
+  h2,h3{break-after:avoid;page-break-after:avoid;orphans:3;widows:3}
+  p{orphans:3;widows:3}
+
+  @media print{
+    body{background:#fff}
+    .page{max-width:100%;box-shadow:none}
+    .cover{padding:60px 40px}
+    .section{padding:24px 50px;border-top:1px solid #f0f4f8}
+    .card,.highlight-box,.tl-item,.stat-row,.pay-card,
+    .roi-card,.sig-box,.pay-schedule,.roi-grid{break-inside:avoid;page-break-inside:avoid}
+    .cards,.two-col,.three-col{break-inside:avoid;page-break-inside:avoid}
+    tr{break-inside:avoid;page-break-inside:avoid}
+    h2,h3,h4{break-after:avoid;page-break-after:avoid}
+    tbody tr:hover{background:transparent}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ════════════ COVER ════════════ -->
+<div class="cover">
+  <div class="cover-logo">
+    <div class="logo-box">🎓</div>
+    <div class="logo-text">The RightWay Centre of Learning</div>
+  </div>
+  <div>
+    <div class="cover-badge">🔒 HIGHLY CONFIDENTIAL · REF: RW-COL-2026-001</div>
+    <h1>School Management<br/>Platform &amp; Website<br/>for <span>The RightWay Centre<br/>of Learning</span></h1>
+    <p class="cover-sub">A purpose-built, enterprise-grade school management system covering academics, finance, HR, admissions, medical, and communication — with a full public-facing website. Built for Trinidad &amp; Tobago.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><label>Prepared for</label><span>The RightWay Centre of Learning</span></div>
+      <div class="cover-meta-item"><label>Prepared by</label><span>Philip Obiri, Lead Software Engineer</span></div>
+      <div class="cover-meta-item"><label>Date</label><span>May 2026</span></div>
+      <div class="cover-meta-item"><label>Investment</label><span>USD $50,000 (TTD 337,000)</span></div>
+      <div class="cover-meta-item"><label>Valid Until</label><span>31 July 2026</span></div>
+    </div>
+  </div>
+  <div class="cover-ref">HIGHLY CONFIDENTIAL · FOR THE RIGHTWAY CENTRE OF LEARNING ONLY</div>
+</div>
+<div class="confidential-stripe">⚿ Highly Confidential - Not for Distribution - Property of The RightWay Centre of Learning</div>
+
+<!-- ════════════ 01. EXECUTIVE SUMMARY ════════════ -->
+<div class="section">
+  <div class="section-tag"><span class="dot"></span> Section 01</div>
+  <div class="divider"></div>
+  <h2>Executive Summary</h2>
+  <p class="lead">This proposal presents a complete digital platform for <strong>The RightWay Centre of Learning</strong> — covering admissions, fee collection via WiPay Caribbean, academic delivery, HR, finance, medical, and a professional public website, all from one secure system owned outright by the school.</p>
+
+  <div class="stat-row" style="margin-top:16px">
+    <div class="stat-item"><div class="stat-value">95+</div><div class="stat-label">Platform Pages</div></div>
+    <div class="stat-item"><div class="stat-value">8</div><div class="stat-label">Role Portals</div></div>
+    <div class="stat-item"><div class="stat-value">144</div><div class="stat-label">Database Collections</div></div>
+    <div class="stat-item"><div class="stat-value">12</div><div class="stat-label">Weeks to Deliver</div></div>
+    <div class="stat-item"><div class="stat-value">$50K</div><div class="stat-label">All-Inclusive (USD)</div></div>
+  </div>
+
+  <div class="highlight-box green" style="margin-top:14px">
+    <h3>🎯 The Bottom Line</h3>
+    <p style="margin:0">This platform eliminates paper registers, automates fee invoicing in TTD, gives parents real-time visibility into their child's progress, and consolidates HR, finance, medical, and academics into one system — replacing tools that cost <strong>USD $27,000–58,000 per year</strong> in SaaS subscriptions. Break-even: under 2 years.</p>
+  </div>
+</div>
+
+<!-- ════════════ 02. YOUR INSTITUTION ════════════ -->
+<div class="section">
+  <div class="section-tag"><span class="dot"></span> Section 02</div>
+  <div class="divider"></div>
+  <h2>Understanding Your Institution</h2>
+  <p>The RightWay Centre of Learning is a private school in Trinidad &amp; Tobago offering Early Childhood Education, Primary School, and SEA preparation. As the school grows, manual operations create friction that limits quality and scale.</p>
+
+  <div class="two-col" style="margin-top:12px">
+    <div>
+      <h3>⚠️ Current Challenges</h3>
+      <ul class="checklist">
+        <li class="cross">Paper admission forms, no pipeline visibility</li>
+        <li class="cross">Cash fee collection with no automated tracking</li>
+        <li class="cross">No parent portal — updates via WhatsApp only</li>
+        <li class="cross">No centralised gradebook or progress reports</li>
+        <li class="cross">No HR system — leave and appraisals handled informally</li>
+        <li class="cross">No finance reporting — no Ledger, Trial Balance, or P&amp;L</li>
+        <li class="cross">Sick bay records in paper files, no inventory</li>
+      </ul>
+    </div>
+    <div>
+      <h3>✅ What This Platform Delivers</h3>
+      <ul class="checklist">
+        <li>Online 8-step admissions form, 7-stage pipeline</li>
+        <li>WiPay Caribbean — TTD card payments, auto invoices &amp; receipts</li>
+        <li>Parent portal — live grades, behaviour, report cards</li>
+        <li>Automated gradebook: CA 30% + Exam 70%, quizzes</li>
+        <li>Full HR: clock in/out, leave, CPD, performance reviews</li>
+        <li>Double-entry accounting: Ledger, P&amp;L, Balance Sheet, payroll</li>
+        <li>Digital sick bay: patient records, medication inventory</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ 03. PLATFORM OVERVIEW ════════════ -->
+<div class="section">
+  <div class="section-tag"><span class="dot"></span> Section 03</div>
+  <div class="divider"></div>
+  <h2>Platform Overview</h2>
+  <p>The RightWay Platform is a full-stack, production-ready web application built on <strong>FastAPI 0.115</strong> and <strong>React 19</strong>, delivered as a Progressive Web App (PWA) — it works offline and installs like a native app on any device.</p>
+
+  <div class="cards" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card highlight">
+      <div class="card-icon">🌍</div>
+      <h4>Public School Website</h4>
+      <p>7 pages + CMS admin panel, digital admissions form, WhatsApp widget, full SEO</p>
+    </div>
+    <div class="card highlight">
+      <div class="card-icon">💳</div>
+      <h4>Payments (WiPay TTD)</h4>
+      <p>3D Secure, Hosted Payment Page, webhook-verified, PDF invoices &amp; receipts</p>
+    </div>
+    <div class="card highlight">
+      <div class="card-icon">📚</div>
+      <h4>Academic LMS</h4>
+      <p>Lessons, assignments, quizzes, auto-grading, Scheme of Work, digital timetable</p>
+    </div>
+    <div class="card highlight">
+      <div class="card-icon">💰</div>
+      <h4>Finance &amp; Accounting</h4>
+      <p>Double-entry bookkeeping, General Ledger, Trial Balance, P&amp;L, payroll, petty cash</p>
+    </div>
+    <div class="card highlight">
+      <div class="card-icon">👥</div>
+      <h4>HR Management</h4>
+      <p>Clock in/out, leave approvals, CPD tracking, behaviour incidents, performance reviews</p>
+    </div>
+    <div class="card highlight">
+      <div class="card-icon">🏥</div>
+      <h4>Medical + Communication</h4>
+      <p>Sick bay records, medication inventory, real-time chat, push notifications, email</p>
+    </div>
+  </div>
+
+  <h3>👥 Role Portals</h3>
+  <table>
+    <thead><tr><th>Portal</th><th>Users</th><th>Key Capabilities</th></tr></thead>
+    <tbody>
+      <tr><td>Admin / CEO</td><td>Principal, Administrator</td><td>Full access — analytics, finance, HR, admissions, timetable, audit logs</td></tr>
+      <tr><td>Teacher</td><td>All teaching staff</td><td>Lessons, Scheme of Work, attendance, gradebook, assignments, behaviour</td></tr>
+      <tr><td>Student</td><td>All enrolled students</td><td>Timetable, lessons, assignments, quizzes, notifications, resources</td></tr>
+      <tr><td>Parent</td><td>Parents / Guardians</td><td>Live grades, behaviour records, report cards, invoices, communication</td></tr>
+      <tr><td>Specialist</td><td>Nurse, Receptionist, Guesthouse</td><td>Sick bay, medication, inventory, procurement, bookings, expenses</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════════════ 04. TECH STACK & PAYMENT ════════════ -->
+<div class="section">
+  <div class="section-tag"><span class="dot"></span> Section 04</div>
+  <div class="divider"></div>
+  <h2>Technical Stack &amp; Infrastructure</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>⚙️ Backend</h3>
+      <ul class="checklist">
+        <li><strong>FastAPI 0.115</strong> (Python 3.12) — async REST API</li>
+        <li><strong>MongoDB 7</strong> — 144 collections, 62 API modules</li>
+        <li>~54,000 lines of Python, role-based access control</li>
+        <li>Brute-force lockout, rate limiting, full audit trail</li>
+        <li>PDF generation, WebSocket chat, web push (VAPID)</li>
+        <li>OpenAI GPT-4 plagiarism + Google Gemini search</li>
+      </ul>
+    </div>
+    <div>
+      <h3>🖥️ Frontend &amp; Server</h3>
+      <ul class="checklist">
+        <li><strong>React 19</strong> + Tailwind CSS + Radix UI</li>
+        <li>~32,200 lines of JSX across 95+ pages</li>
+        <li>PWA — offline support, install prompt, background sync</li>
+        <li>Namecheap Magnetar VPS — 6 cores, 8GB RAM, 240GB SSD</li>
+        <li>Nginx + PM2 + Let's Encrypt SSL + UFW firewall</li>
+        <li>Namecheap weekly snapshots + MongoDB cron backups</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:4px">
+    <h3>🌊 WiPay Caribbean — TTD-Native Payment Gateway</h3>
+    <p style="margin:0">Purpose-built for Trinidad &amp; Tobago. Supports TTD, USD, JMD, BBD natively. All transactions go through a <strong>Hosted Payment Page</strong> (PCI DSS compliant) with <strong>3D Secure</strong> authentication. Server-side webhook verification — no payment data stored on the school's server. PDF invoices and receipts generated and emailed automatically on every payment.</p>
+  </div>
+</div>
+
+<!-- ════════════ 05. IMPLEMENTATION TIMELINE ════════════ -->
+<div class="section">
+  <div class="section-tag"><span class="dot"></span> Section 05</div>
+  <div class="divider"></div>
+  <h2>Implementation Timeline - 12 Weeks</h2>
+  <p>Delivered in five structured phases with client review checkpoints at the end of each. The 12-week schedule is achievable because core architecture is already designed and partially built.</p>
+
+  <div class="timeline" style="margin-top:16px">
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-circle">1</div><div class="tl-line"></div></div>
+      <div class="tl-right">
+        <div class="tl-header"><span class="tl-title">Discovery, Design &amp; Infrastructure Setup</span><span class="tl-period">Week 1</span><span class="badge badge-blue">Foundation</span></div>
+        <ul class="tl-tasks">
+          <li>Finalise requirements, VPS provisioning, Nginx + SSL + UFW setup</li>
+          <li>MongoDB schema design, staging environment configuration</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-circle">2</div><div class="tl-line"></div></div>
+      <div class="tl-right">
+        <div class="tl-header"><span class="tl-title">Backend APIs — All Core Modules</span><span class="tl-period">Weeks 2–4</span><span class="badge badge-teal">Backend</span></div>
+        <ul class="tl-tasks">
+          <li>Auth (JWT, RBAC, lockout), Academic, Admissions pipeline</li>
+          <li>Finance (double-entry, payroll), HR (leave, CPD), Medical, Communication</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-circle">3</div><div class="tl-line"></div></div>
+      <div class="tl-right">
+        <div class="tl-header"><span class="tl-title">Frontend — Admin, Teacher, Student &amp; Parent Portals</span><span class="tl-period">Weeks 5–8</span><span class="badge badge-green">Frontend Core</span></div>
+        <ul class="tl-tasks">
+          <li>Admin (30+ pages, finance tabs, HR, timetable), Teacher (lessons, gradebook)</li>
+          <li>Student (assignments, quizzes), Parent (grades, behaviour, invoices)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-circle">4</div><div class="tl-line"></div></div>
+      <div class="tl-right">
+        <div class="tl-header"><span class="tl-title">Specialist Portals, Website &amp; Integrations</span><span class="tl-period">Weeks 9–10</span><span class="badge badge-yellow">Specialist</span></div>
+        <ul class="tl-tasks">
+          <li>Nurse, Reception, Guesthouse portals. 7-page public website + CMS</li>
+          <li>WiPay Caribbean integration, real-time chat, push notifications</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-circle">5</div><div class="tl-line"></div></div>
+      <div class="tl-right">
+        <div class="tl-header"><span class="tl-title">Testing, UAT, Deployment &amp; Training</span><span class="tl-period">Weeks 11–12</span><span class="badge badge-green">Launch</span></div>
+        <ul class="tl-tasks">
+          <li>Full regression testing, UAT with RightWay staff, production deployment</li>
+          <li>Staff training workshops, DNS go-live, 60-day warranty begins</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ 06. INVESTMENT ════════════ -->
+<div class="section">
+  <div class="section-tag"><span class="dot"></span> Section 06</div>
+  <div class="divider"></div>
+  <h2>Investment Breakdown</h2>
+  <p>All pricing in <strong>USD</strong> with TTD equivalents at <strong>USD 1 = TTD 6.74</strong> (May 2026).</p>
+
+  <table>
+    <thead>
+      <tr><th>Component</th><th class="td-center">Est. Hours</th><th class="td-right">USD</th><th class="td-right">TTD</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Public School Website (7 pages + CMS admin panel + 8-step admissions form)</td>
+        <td class="td-center">300 hrs</td><td class="td-right">$7,000</td><td class="td-right">TTD 47,180</td>
+      </tr>
+      <tr>
+        <td>LMS Backend — FastAPI, MongoDB (144 collections, 62 API modules)</td>
+        <td class="td-center">1,300 hrs</td><td class="td-right">$15,500</td><td class="td-right">TTD 104,470</td>
+      </tr>
+      <tr>
+        <td>LMS Frontend — 7 role portals, 95+ pages (Admin, Teacher, Student, Parent, Nurse, Reception, Guesthouse)</td>
+        <td class="td-center">1,040 hrs</td><td class="td-right">$23,700</td><td class="td-right">TTD 159,738</td>
+      </tr>
+      <tr>
+        <td>VPS deployment (Nginx, SSL, UFW, PM2, MongoDB) + Domain (.com, 2 years)</td>
+        <td class="td-center">10 hrs</td><td class="td-right">$374</td><td class="td-right">TTD 2,521</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr><td colspan="2">All-Inclusive Client Invoice (rounded)</td>
+        <td class="td-right" style="color:#f8d904">$50,000</td>
+        <td class="td-right" style="color:#f8d904">TTD 337,000</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="price-total">
+    <div>
+      <div class="label">All-Inclusive - No Hidden Costs</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px">VPS (Year 1) + Domain (2 yrs) + SSL + Deployment + Training + 60-day Warranty — all included</div>
+    </div>
+    <div style="text-align:right">
+      <div class="amount">USD $50,000</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:2px">TTD 337,000</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:20px">💳 Payment Schedule</h3>
+  <div class="pay-schedule">
+    <div class="pay-card p1">
+      <div class="pay-pct">50%</div>
+      <div class="pay-amount">USD $25,000</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-bottom:4px">TTD 168,500</div>
+      <div class="pay-label">Due on contract signing<br/>Work commences on clearance</div>
+    </div>
+    <div class="pay-card p2">
+      <div class="pay-pct">25%</div>
+      <div class="pay-amount">USD $12,500</div>
+      <div style="font-size:11px;color:#64748b;margin-bottom:4px">TTD 84,250</div>
+      <div class="pay-label">Due at Week 6 milestone<br/>Core system demonstrated</div>
+    </div>
+    <div class="pay-card p3">
+      <div class="pay-pct">25%</div>
+      <div class="pay-amount">USD $12,500</div>
+      <div style="font-size:11px;color:#64748b;margin-bottom:4px">TTD 84,250</div>
+      <div class="pay-label">Due on final delivery<br/>&amp; UAT sign-off</div>
+    </div>
+  </div>
+
+  <p style="font-size:12px;color:#94a3b8;margin-top:8px">From Year 2, hosting (~$25/month) and domain renewal (~$14/year) transfer directly to The RightWay Centre's account.</p>
+</div>
+
+<!-- ════════════ 07. WHY THIS INVESTMENT MAKES SENSE ════════════ -->
+<div class="section">
+  <div class="section-tag"><span class="dot"></span> Section 07</div>
+  <div class="divider"></div>
+  <h2>Why This Investment Makes Sense</h2>
+
+  <div class="highlight-box dark">
+    <h3 style="font-size:17px;color:#f8d904;margin-bottom:8px">This is not an expense. It is the purchase of a permanent school asset.</h3>
+    <p style="margin:0">USD $50,000 buys a fully operational school management platform that The RightWay Centre owns outright — not a subscription, not a licence that expires. Every comparable off-the-shelf platform costs more than $50,000 <em>every single year</em>, with no ownership and no Caribbean payment integration. You pay once. It is yours forever.</p>
+  </div>
+
+  <h3>📊 The 5-Year Financial Picture</h3>
+  <table>
+    <thead><tr><th>Year</th><th>This Platform (USD)</th><th>SaaS Equivalent (USD)</th><th class="td-right">You Save</th></tr></thead>
+    <tbody>
+      <tr><td>Year 1</td><td>$50,000 all-inclusive</td><td>$29,780–62,120</td><td class="td-right td-green">You own the asset</td></tr>
+      <tr><td>Year 2</td><td>$5,112 only</td><td>$29,780–62,120</td><td class="td-right td-green">$24,668–57,008</td></tr>
+      <tr><td>Year 3</td><td>$5,112 only</td><td>$29,780–62,120</td><td class="td-right td-green">$24,668–57,008</td></tr>
+      <tr><td>Year 4</td><td>$5,112 only</td><td>$29,780–62,120</td><td class="td-right td-green">$24,668–57,008</td></tr>
+      <tr><td>Year 5</td><td>$5,112 only</td><td>$29,780–62,120</td><td class="td-right td-green">$24,668–57,008</td></tr>
+    </tbody>
+    <tfoot>
+      <tr><td>5-Year Total</td><td style="color:#f8d904">$70,448</td><td>$148,900–310,600</td><td class="td-right" style="color:#f8d904">Save $78K–$240K</td></tr>
+    </tfoot>
+  </table>
+
+  <div class="roi-grid">
+    <div class="roi-card navy">
+      <div class="roi-title">All-Inclusive Investment</div>
+      <div class="roi-value">$50,000</div>
+      <div class="roi-sub">Hosting yr 1 + domain included — then ~$5,112/yr</div>
+    </div>
+    <div class="roi-card positive">
+      <div class="roi-title">Break-Even vs. SaaS</div>
+      <div class="roi-value">&lt; 18 Months</div>
+      <div class="roi-sub">Platform pays for itself in under a year and a half</div>
+    </div>
+    <div class="roi-card positive">
+      <div class="roi-title">5-Year Net Saving</div>
+      <div class="roi-value">$78K–$240K</div>
+      <div class="roi-sub">Compared to equivalent SaaS stack</div>
+    </div>
+    <div class="roi-card navy">
+      <div class="roi-title">vs. International EdTech Vendor</div>
+      <div class="roi-value">55–87% Less</div>
+      <div class="roi-sub">vs. $45,000–$300,000 for comparable scope globally</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ 08. INCLUSIONS & TERMS ════════════ -->
+<div class="section">
+  <div class="section-tag"><span class="dot"></span> Section 08</div>
+  <div class="divider"></div>
+  <h2>Inclusions, Exclusions &amp; Terms</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>✅ Included in the Quote</h3>
+      <ul class="checklist">
+        <li>All 8 role portals and 95+ platform pages</li>
+        <li>Public website — 7 pages + CMS + SEO</li>
+        <li>WiPay Caribbean payment integration (TTD, 3D Secure)</li>
+        <li>Full accounting suite (double-entry, payroll, PDF reports)</li>
+        <li>VPS (Year 1), domain (.com, 2 years), SSL, Nginx, PM2</li>
+        <li>Staff training workshops + 60-day post-launch warranty</li>
+        <li>Source code delivered on final payment — full ownership</li>
+      </ul>
+      <h3 style="margin-top:16px">✗ Not Included</h3>
+      <ul class="checklist">
+        <li class="cross">WiPay transaction fees (1.5–3.5% per payment, charged by WiPay)</li>
+        <li class="cross">OpenAI / Google Gemini API usage costs</li>
+        <li class="cross">Data entry of existing student/staff records</li>
+        <li class="cross">Features added after agreed scope (change-order quoted separately)</li>
+      </ul>
+    </div>
+    <div>
+      <h3>📄 General Terms</h3>
+      <ul class="checklist">
+        <li><strong>Currency:</strong> USD. TTD at USD 1 = TTD 6.74 — fixed at contract signing.</li>
+        <li><strong>Validity:</strong> Proposal valid for 60 days (until 31 July 2026).</li>
+        <li><strong>Scope changes:</strong> Features outside agreed scope require a separate change order.</li>
+        <li><strong>Client duties:</strong> Timely feedback, logo/images/content, UAT participation.</li>
+        <li><strong>Delays:</strong> Developer not liable for delays caused by late client responses.</li>
+      </ul>
+      <h3 style="margin-top:16px">⚖️ IP &amp; Warranty</h3>
+      <ul class="checklist">
+        <li><strong>IP Transfer:</strong> Full source code transfers to The RightWay Centre on final payment.</li>
+        <li><strong>60-Day Warranty:</strong> All bugs reported within 60 days of go-live fixed at no charge.</li>
+        <li><strong>Data ownership:</strong> All school data remains exclusively The RightWay Centre's property.</li>
+        <li><strong>APIs:</strong> Developer not responsible for WiPay, OpenAI, or Google outages.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ 09. ACCEPTANCE & SIGNATURE ════════════ -->
+<div class="section">
+  <div class="section-tag"><span class="dot"></span> Section 09</div>
+  <div class="divider"></div>
+  <h2>Proposal Acceptance</h2>
+  <p>By completing the fields below, both parties confirm agreement to the scope, timeline, pricing, and terms outlined in this proposal. Work commences upon receipt of the 50% deposit.</p>
+
+  <div class="highlight-box amber" style="margin:16px 0">
+    <h3>📋 Summary of Agreement</h3>
+    <div class="price-row"><div class="price-label">Scope<span>Full Platform - Website + LMS + All Portals + Deployment</span></div><div class="price-amount" style="color:#044875">Sections 03–06</div></div>
+    <div class="price-row"><div class="price-label">Timeline<span>12 weeks from contract signing + deposit clearance</span></div><div class="price-amount" style="color:#044875">12 Weeks</div></div>
+    <div class="price-row"><div class="price-label">Total Investment<span>All-inclusive — development, VPS, domain, deployment, training</span></div><div class="price-amount" style="color:#044875;font-size:17px">USD $50,000 (TTD 337,000)</div></div>
+    <div class="price-row"><div class="price-label">Deposit Due (50%) — to commence work</div><div class="price-amount" style="color:#059669">USD $25,000 (TTD 168,500)</div></div>
+    <div class="price-row"><div class="price-label">Warranty Period</div><div class="price-amount">60 days post go-live</div></div>
+  </div>
+
+  <div class="sig-box">
+    <div class="sig-item">
+      <div class="name">Philip Obiri</div>
+      <div class="title">Lead Software Engineer</div>
+      <div class="title" style="font-size:11px;color:#94a3b8;font-style:italic;margin-top:2px">Telson Technologies</div>
+      <div class="title" style="margin-top:4px">📧 pobiriofficial@gmail.com &nbsp;|&nbsp; 📞 +233 550 049 921</div>
+      <div class="sig-field" style="margin-top:14px">
+        <label>Full Name</label>
+        <div style="height:26px;visibility:hidden"></div>
+      </div>
+      <div class="sig-field" style="margin-top:10px">
+        <label>Date</label>
+        <div style="height:26px;visibility:hidden"></div>
+      </div>
+      <div class="sig-check" style="visibility:hidden;min-height:44px">
+        <label>I agree to all terms and conditions outlined in this proposal</label>
+      </div>
+    </div>
+    <div class="sig-item">
+      <div class="name">The RightWay Centre of Learning</div>
+      <div class="title">Director / Principal</div>
+      <div class="title" style="margin-top:4px">Trinidad &amp; Tobago</div>
+      <div class="sig-field" style="margin-top:14px">
+        <label>Full Name</label>
+        <div style="height:26px;visibility:hidden"></div>
+      </div>
+      <div class="sig-field" style="margin-top:10px">
+        <label>Date</label>
+        <div style="height:26px;visibility:hidden"></div>
+      </div>
+      <div class="sig-check" style="visibility:hidden;min-height:44px">
+        <label>I agree to all terms and conditions outlined in this proposal</label>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:24px;text-align:center;padding:14px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0">
+    <p style="font-size:12px;color:#94a3b8;margin:0">This proposal is prepared exclusively for The RightWay Centre of Learning and must not be shared with any third party.<br/>Pricing and availability are subject to change after <strong>31 July 2026</strong>.</p>
+  </div>
+</div>
+
+<!-- ════════════ FOOTER ════════════ -->
+<div class="doc-footer">
+  <div><span class="footer-gold">The RightWay Centre of Learning</span> - School Management Platform Proposal</div>
+  <div>Ref: RW-COL-2026-001 · May 2026 · Philip Obiri</div>
+  <div style="color:rgba(248,217,4,0.6);font-weight:600">HIGHLY CONFIDENTIAL</div>
+</div>
+
+</div><!-- /.page -->
+</body>
+</html>

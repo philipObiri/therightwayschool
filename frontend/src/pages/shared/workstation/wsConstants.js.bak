@@ -1,0 +1,36 @@
+import { FileText, FileSpreadsheet, Image, Table, File, Globe, Lock, Shield, AlertTriangle } from 'lucide-react';
+
+export const STATUS_COLORS = {
+  draft: 'bg-slate-100 text-slate-700',
+  under_review: 'bg-amber-50 text-amber-700',
+  approved: 'bg-emerald-50 text-emerald-700',
+  rejected: 'bg-red-50 text-red-700',
+  published: 'bg-blue-50 text-blue-700',
+  archived: 'bg-slate-100 text-slate-500',
+};
+
+export const CLASS_CONFIG = {
+  public: { icon: Globe, color: 'text-emerald-600', bg: 'bg-emerald-50', label: 'Public' },
+  restricted: { icon: Lock, color: 'text-amber-600', bg: 'bg-amber-50', label: 'Restricted' },
+  confidential: { icon: Shield, color: 'text-red-600', bg: 'bg-red-50', label: 'Confidential' },
+  approval_controlled: { icon: AlertTriangle, color: 'text-purple-600', bg: 'bg-purple-50', label: 'Approval Required' },
+};
+
+const FILE_TYPE_CONFIG = {
+  pdf: { icon: FileText, color: 'text-red-500', bg: 'bg-red-50' },
+  docx: { icon: FileText, color: 'text-blue-600', bg: 'bg-blue-50' },
+  doc: { icon: FileText, color: 'text-blue-600', bg: 'bg-blue-50' },
+  xlsx: { icon: FileSpreadsheet, color: 'text-green-600', bg: 'bg-green-50' },
+  xls: { icon: FileSpreadsheet, color: 'text-green-600', bg: 'bg-green-50' },
+  pptx: { icon: FileText, color: 'text-orange-500', bg: 'bg-orange-50' },
+  ppt: { icon: FileText, color: 'text-orange-500', bg: 'bg-orange-50' },
+  jpg: { icon: Image, color: 'text-purple-500', bg: 'bg-purple-50' },
+  jpeg: { icon: Image, color: 'text-purple-500', bg: 'bg-purple-50' },
+  png: { icon: Image, color: 'text-purple-500', bg: 'bg-purple-50' },
+  csv: { icon: Table, color: 'text-green-500', bg: 'bg-green-50' },
+  txt: { icon: FileText, color: 'text-slate-500', bg: 'bg-slate-50' },
+};
+
+export function getFileConfig(type) {
+  return FILE_TYPE_CONFIG[(type || '').toLowerCase()] || { icon: File, color: 'text-slate-400', bg: 'bg-slate-50' };
+}

@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Finance Suite — Proposal | The RightWay Centre of Learning</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f0f4f8;font-family:'DM Sans',sans-serif;color:#1e293b}
+.page{max-width:794px;margin:0 auto;background:#fff;box-shadow:0 4px 32px rgba(0,0,0,.10)}
+.cover{background:linear-gradient(135deg,#044875 0%,#065d94 55%,#0a7ac4 100%);color:#fff;padding:90px 60px 70px;position:relative;min-height:420px}
+.cover-logo{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:42px}
+.phase-chip{display:inline-block;background:rgba(248,217,4,.18);border:1.5px solid #f8d904;color:#f8d904;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:26px}
+.cover h1{font-family:'Outfit',sans-serif;font-size:34px;font-weight:800;line-height:1.2;margin-bottom:20px}
+.cover-sub{font-size:14px;opacity:.75;margin-bottom:44px}
+.cover-price{display:inline-block;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.3);border-radius:12px;padding:20px 34px;margin-bottom:36px}
+.cover-price .label{font-size:11px;opacity:.7;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.cover-price .amount{font-family:'Outfit',sans-serif;font-size:32px;font-weight:800;color:#f8d904}
+.referral-badge{display:flex;align-items:center;gap:10px;background:rgba(248,217,4,.1);border:1px solid rgba(248,217,4,.3);border-radius:8px;padding:14px 20px;margin-top:32px;font-size:12px;opacity:.9}
+.referral-badge .dot{width:8px;height:8px;background:#f8d904;border-radius:50%;flex-shrink:0}
+.section{padding:56px 60px;border-top:2px solid #e2e8f0}
+.section h2{font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#044875;margin-bottom:28px;display:flex;align-items:center;gap:8px}
+.section h2 .num{background:#044875;color:#fff;font-size:10px;padding:2px 7px;border-radius:4px}
+.section h3{font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;color:#1e293b;margin-bottom:24px}
+p{font-size:13.5px;line-height:1.82;color:#475569;margin-bottom:20px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px}
+.card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px;border-top:3px solid #044875}
+.card .icon{font-size:20px;margin-bottom:8px}
+.card h4{font-size:13px;font-weight:700;color:#1e293b;margin-bottom:4px}
+.card p{font-size:12px;color:#64748b;margin:0}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}
+thead tr{background:#044875;color:#fff}
+thead th{padding:10px 14px;text-align:left;font-weight:600;font-size:12px}
+tbody tr:nth-child(even){background:#f8fafc}
+tbody td{padding:9px 14px;color:#334155;border-bottom:1px solid #f0f4f8}
+.goodwill-box{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1.5px solid #f8d904;border-radius:12px;padding:28px 32px;margin-top:24px}
+.goodwill-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center;margin-bottom:14px}
+.goodwill-grid .col-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#92400e;margin-bottom:6px}
+.goodwill-grid .market{font-size:20px;color:#94a3b8;text-decoration:line-through;font-family:'Outfit',sans-serif;font-weight:700}
+.goodwill-grid .saving{font-size:20px;color:#16a34a;font-family:'Outfit',sans-serif;font-weight:700}
+.goodwill-grid .final{font-size:26px;color:#044875;font-family:'Outfit',sans-serif;font-weight:800}
+.goodwill-note{font-size:12px;color:#78350f;font-style:italic;text-align:center;border-top:1px solid #fde68a;padding-top:12px;margin-top:2px}
+.cost-breakdown{margin-top:24px;border:1.5px solid #e2e8f0;border-radius:10px;overflow:hidden}
+.cb-row{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid #f0f4f8;font-size:13px}
+.cb-row.new-item{background:linear-gradient(90deg,#f0fdf4,#fff);border-left:3px solid #16a34a}
+.cb-row.cb-total{background:#044875;border-bottom:none;padding:14px 16px}
+.cb-row .cb-label{display:flex;align-items:center;gap:8px;color:#334155}
+.cb-row.cb-total .cb-label{color:#fff;font-size:14px;font-weight:700}
+.cb-badge{font-size:10px;background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:20px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
+.cb-row .cb-price{font-family:'Outfit',sans-serif;font-weight:700;color:#044875}
+.cb-row.cb-total .cb-price{color:#f8d904;font-size:16px}
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:24px}
+.pay-card{background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:18px;text-align:center}
+.pay-card .milestone{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px}
+.pay-card .amount{font-family:'Outfit',sans-serif;font-size:26px;font-weight:800;color:#044875;margin-bottom:4px}
+.pay-card .desc{font-size:12px;color:#64748b}
+.retainer-box{background:linear-gradient(135deg,#e8f4fb,#c1e5e6);border:1.5px solid #0a7ac4;border-radius:12px;padding:26px 30px;margin-top:24px}
+.retainer-box h4{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#044875;margin-bottom:10px}
+.retainer-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(10,122,196,.15);font-size:13px}
+.retainer-row:last-child{border-bottom:none;font-weight:700;color:#044875;padding-top:10px}
+.retainer-row .val{color:#044875;font-weight:600}
+.tl-grid{display:grid;gap:20px;margin-top:24px}
+.tl-item{display:flex;gap:16px;align-items:flex-start}
+.tl-dot{width:32px;height:32px;background:#044875;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px}
+.tl-content h4{font-size:13px;font-weight:700;color:#1e293b;margin-bottom:2px}
+.tl-content p{font-size:12px;color:#64748b;margin:0}
+.modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.module-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.module-card.active{background:linear-gradient(90deg,#e8f4fb,#f0f9ff);border:1.5px solid #044875;border-left:4px solid #044875}
+.module-card.complete-card{grid-column:1/-1;background:linear-gradient(90deg,#fffbeb,#fefce8);border:1.5px solid #f8d904}
+.mod-info .mod-name{font-size:13px;font-weight:700;color:#1e293b}
+.module-card.active .mod-info .mod-name{color:#044875}
+.mod-info .mod-desc{font-size:11px;color:#64748b;margin-top:2px}
+.mod-price{font-family:'Outfit',sans-serif;font-weight:800;color:#044875;font-size:15px;white-space:nowrap;margin-left:12px}
+.module-card.complete-card .mod-price{color:#92400e}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:14px}
+.list-box h4{font-size:13px;font-weight:700;color:#1e293b;margin-bottom:8px}
+.list-box ul{list-style:none;padding:0}
+.list-box ul li{font-size:12.5px;color:#475569;padding:4px 0;border-bottom:1px solid #f0f4f8;display:flex;gap:8px}
+.list-box ul li::before{content:"✓";color:#16a34a;font-weight:700;flex-shrink:0}
+.list-box ul li.no::before{content:"✗";color:#dc2626}
+.sig-box{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:20px}
+.sig-item{border-top:2px solid #e2e8f0;padding-top:14px}
+.sig-item .name{font-weight:700;font-size:14px;color:#1e293b;margin-bottom:2px}
+.sig-item .title{font-size:12px;color:#64748b}
+.sig-field{margin-top:12px}
+.sig-field label{display:block;font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.sig-check{margin-top:12px;display:flex;align-items:center;gap:10px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;padding:10px 14px;min-height:44px}
+.sig-check label{font-size:12px;color:#475569;line-height:1.4}
+.doc-footer{background:#044875;color:#fff;padding:16px 60px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.doc-footer .left{font-size:11px;opacity:.8;flex:1}
+.doc-footer .left strong{color:#f8d904}
+.doc-footer .center{font-size:10px;opacity:.55;text-align:center;letter-spacing:.3px;flex:2}
+.doc-footer .right{font-size:11px;font-weight:700;letter-spacing:1px;color:#f8d904;flex:1;text-align:right}
+@media print{body{background:#fff}.page{max-width:100%;box-shadow:none}.cover{padding:60px 40px 40px}.section{padding:22px 50px;border-top:1px solid #f0f4f8}.card,.goodwill-box,.retainer-box,.pay-card,.tl-item,.sig-box,.cost-breakdown,.modules-grid{break-inside:avoid;page-break-inside:avoid}.cards,.two-col,.pay-grid{break-inside:avoid;page-break-inside:avoid}tr{break-inside:avoid;page-break-inside:avoid}h2,h3{break-after:avoid;page-break-after:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="cover">
+  <div class="cover-logo">The RightWay Centre of Learning &mdash; Trinidad &amp; Tobago</div>
+  <div class="phase-chip">Finance Module</div>
+  <h1>Complete School Finance Suite</h1>
+  <div class="cover-sub">Full double-entry accounting, payroll processing, bank reconciliation, and export-ready financial statements — integrated directly into your school management system.</div>
+  <div class="cover-price">
+    <div class="label">Finance Module Investment</div>
+    <div class="amount">USD $6,500</div>
+  </div>
+  <div class="referral-badge">
+    <div class="dot"></div>
+    Goodwill discount applied &mdash; Referred by <strong>&nbsp;Prof. Elvis Cornerstone</strong>
+  </div>
+</div>
+
+<div class="section">
+  <h2><span class="num">01</span> Why This Module</h2>
+  <h3>Stop managing school finances in spreadsheets.</h3>
+  <p>Most schools in Trinidad & Tobago track fees, payroll, and expenses across a patchwork of Excel files, WhatsApp messages, and handwritten ledgers. There's no audit trail, no real-time picture of cash flow, and no easy way to produce financial statements for the board or Ministry.</p>
+  <p>This module brings a complete double-entry accounting system into your school platform — the same accounting logic that powers corporate finance software, purpose-built for a school environment. Every fee collected, every salary processed, every expense recorded — in one place, with export-ready reports on demand.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">📒</div>
+      <h4>Full Accounting</h4>
+      <p>Chart of Accounts, General Ledger, Journal Entries, Trial Balance, Income Statement, Balance Sheet.</p>
+    </div>
+    <div class="card">
+      <div class="icon">💼</div>
+      <h4>Payroll</h4>
+      <p>Staff salary processing, deductions (tax, NIS, health surcharge), payslip generation and storage per pay period.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🏦</div>
+      <h4>Bank Reconciliation</h4>
+      <p>Match bank statements to recorded transactions. Spot discrepancies instantly. Full reconciliation audit trail.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2><span class="num">02</span> What's Included</h2>
+  <h3>A complete finance engine — no external accounting tool needed.</h3>
+  <table>
+    <thead><tr><th>Feature</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Chart of Accounts</strong></td><td>Custom account structure across assets, liabilities, equity, income, and expense categories</td></tr>
+      <tr><td><strong>Journal Entries</strong></td><td>Double-entry bookkeeping, journal posting, GL view with drill-down per account and date range</td></tr>
+      <tr><td><strong>Financial Statements</strong></td><td>Trial Balance, Income Statement (P&amp;L), Balance Sheet — generated on demand, exportable as PDF</td></tr>
+      <tr><td><strong>Bank Reconciliation</strong></td><td>Statement import, transaction matching, unreconciled item alerts, reconciliation history</td></tr>
+      <tr><td><strong>Learner Invoicing</strong></td><td>Fee invoices per learner, payment tracking, outstanding balance reports, WiPay Caribbean integration</td></tr>
+      <tr><td><strong>Payroll Module</strong></td><td>Staff salary setup, deductions (income tax, NIS, health surcharge), payslip generation and staff portal access</td></tr>
+      <tr><td><strong>Budget Management</strong></td><td>Annual budget entry, budget vs. actual tracking per account and department, variance reports</td></tr>
+      <tr><td><strong>Petty Cash</strong></td><td>Petty cash float management, transaction recording, replenishment requests and approval workflow</td></tr>
+      <tr><td><strong>PDF Reports</strong></td><td>All financial statements and reports export to branded, print-ready PDF documents</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:16px;font-size:12px;background:#fef3c7;border:1px solid #f8d904;border-radius:6px;padding:10px 14px;color:#78350f">
+    <strong>Integration note:</strong> This module integrates with your LMS platform. Learner fee data, staff records, and payment history are shared across both systems automatically.
+  </p>
+</div>
+
+<div class="section">
+  <h2><span class="num">03</span> Investment</h2>
+  <h3>Full finance management for less than one year of QuickBooks + payroll subscriptions.</h3>
+  <div class="goodwill-box">
+    <div class="goodwill-grid">
+      <div><div class="col-label">Market Rate</div><div class="market">$16,000</div></div>
+      <div><div class="col-label">Goodwill Saving</div><div class="saving">- $9,000</div></div>
+      <div><div class="col-label">Your Price</div><div class="final">$6,500</div></div>
+    </div>
+    <div class="goodwill-note">This discount is applied as a gesture of goodwill in recognition of the referral by <strong>Prof. Elvis Cornerstone</strong>. It is exclusive to The RightWay Centre of Learning and cannot be transferred.</div>
+  </div>
+  <h4 style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#044875;margin-top:28px;margin-bottom:10px">What You're Paying For</h4>
+  <div class="cost-breakdown">
+    <div class="cb-row new-item"><div class="cb-label">Complete Finance Suite <span class="cb-badge">THIS MODULE</span></div><div class="cb-price">$6,500</div></div>
+    <div class="cb-row cb-total"><div class="cb-label">Finance Module Total</div><div class="cb-price">$6,500</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2><span class="num">04</span> Payment Schedule</h2>
+  <h3>Two clean milestones across 3 weeks.</h3>
+    <div class="pay-grid" style="grid-template-columns:1fr">
+    <div class="pay-card">
+      <div class="milestone">Payment &mdash; On Signing</div>
+      <div class="amount">$7,000</div>
+      <div class="desc">USD $7,000 paid in full on signing. Work begins immediately. Finance Suite delivered within 3 weeks.</div>
+    </div>
+  </div>
+  <div style="margin-top:20px">
+    <h3 style="margin-bottom:6px">After delivery &mdash; Monthly Partnership</h3>
+    <div class="retainer-box">
+      <h4>Monthly Operating Costs (after delivery)</h4>
+      <div class="retainer-row"><span>Telson Technologies Retainer (bug fixes, 10 hrs dev, planning)</span><span class="val">$450/mo</span></div>
+      <div class="retainer-row"><span>VPS Hosting &mdash; Quasar, Namecheap <em style="font-size:10px;opacity:.7">recommended</em></span><span class="val">$154/yr (~$12.83/mo)</span></div>
+      <div class="retainer-row"><span>VPS Hosting &mdash; Magnetar, Namecheap <em style="font-size:10px;opacity:.7">upgrade for high traffic</em></span><span class="val">$296/yr (~$24.67/mo)</span></div>
+      <div class="retainer-row"><span>Email Service &mdash; Mailtrap Basic (10,000+ emails/mo)</span><span class="val">$15/mo</span></div>
+      <div class="retainer-row"><span><strong>Total monthly (Quasar + Mailtrap + Retainer)</strong></span><span class="val"><strong>~$478/mo</strong></span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2><span class="num">05</span> Delivery Timeline &mdash; 3 Weeks</h2>
+  <p style="margin-bottom:16px">This module is deployed as an add-on to your existing LMS installation. No downtime to your current system during the build.</p>
+  <div class="tl-grid">
+    <div class="tl-item"><div class="tl-dot">W1</div><div class="tl-content"><h4>Week 1 &mdash; Accounting Foundation</h4><p>Chart of Accounts setup, Journal Entry system, General Ledger, learner invoicing, WiPay integration.</p></div></div>
+    <div class="tl-item"><div class="tl-dot">W2</div><div class="tl-content"><h4>Week 2 &mdash; Financial Statements &amp; Payroll</h4><p>Trial Balance, Income Statement, Balance Sheet, bank reconciliation, payroll processing and payslip generation.</p></div></div>
+    <div class="tl-item"><div class="tl-dot">W3</div><div class="tl-content"><h4>Week 3 &mdash; Budgets, Petty Cash, UAT &amp; Training</h4><p>Budget management, petty cash module, full user acceptance testing, finance staff training (2 hours, remote), go-live.</p></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2><span class="num">06</span> Other Available Modules</h2>
+  <h3>Build your school platform piece by piece — or get everything at once.</h3>
+  <p>Every module integrates with the LMS platform. Purchase individually or bundle for the complete system.</p>
+  <div class="modules-grid">
+    <div class="module-card">
+      <div class="mod-info"><div class="mod-name">Professional Website</div><div class="mod-desc">7-page site, CMS, admissions form, SEO</div></div>
+      <div class="mod-price">$2,000</div>
+    </div>
+    <div class="module-card">
+      <div class="mod-info"><div class="mod-name">LMS Platform</div><div class="mod-desc">Admin, Teacher, Learner &amp; Parent portals</div></div>
+      <div class="mod-price">$14,000</div>
+    </div>
+    <div class="module-card active">
+      <div class="mod-info"><div class="mod-name">Finance Suite ← You are here</div><div class="mod-desc">Accounting, payroll, bank reconciliation</div></div>
+      <div class="mod-price">$7,000</div>
+    </div>
+    <div class="module-card">
+      <div class="mod-info"><div class="mod-name">HR &amp; Administration</div><div class="mod-desc">Staff management, procurement, inventory</div></div>
+      <div class="mod-price">$5,000</div>
+    </div>
+    <div class="module-card complete-card">
+      <div class="mod-info"><div class="mod-name">Complete Platform — All Modules</div><div class="mod-desc">Website + LMS + Finance + HR &amp; Administration + Free bonus website</div></div>
+      <div class="mod-price">$25,000</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2><span class="num">07</span> Inclusions, Exclusions &amp; Terms</h2>
+  <div class="two-col">
+    <div class="list-box">
+      <h4>What's Included</h4>
+      <ul>
+        <li>Chart of Accounts + Journal Entries</li>
+        <li>General Ledger with drill-down</li>
+        <li>Trial Balance, Income Statement, Balance Sheet</li>
+        <li>Bank Reconciliation module</li>
+        <li>Learner invoicing + WiPay Caribbean</li>
+        <li>Payroll (salary, deductions, payslips)</li>
+        <li>Budget management + Petty Cash</li>
+        <li>PDF financial report exports</li>
+        <li>Finance staff training (2 hours, remote)</li>
+        <li>30-day post-launch support</li>
+      </ul>
+    </div>
+    <div class="list-box">
+      <h4>Not Included</h4>
+      <ul>
+        <li class="no">LMS Platform (required — sold separately)</li>
+        <li class="no">HR &amp; Administration module (sold separately)</li>
+        
+        <li class="no">Domain purchase (client responsibility)</li>
+        <li class="no">VPS hosting — Quasar $154/yr or Magnetar $296/yr (client-billed direct)</li>
+        <li class="no">WiPay transaction fees</li>
+        <li class="no">Tax filing or audit services</li>
+        <li class="no">Financial data migration from prior systems</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:16px;font-size:12px;color:#94a3b8">Confidential — prepared exclusively for The RightWay Centre of Learning. Pricing valid until <strong>31 July 2026</strong>. Scope changes after sign-off will be quoted separately.</p>
+</div>
+
+<div class="section">
+  <h2><span class="num">08</span> Proposal Acceptance</h2>
+  <h3>Replace spreadsheets with a system that actually works.</h3>
+  <div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:20px;font-size:13px;color:#475569">
+    By signing below, both parties agree to the scope, payment schedule, and terms in this proposal. Work begins upon receipt of payment in full of <strong>$7,000 USD</strong>. Pricing valid until <strong>31 July 2026</strong>.
+  </div>
+  <div class="sig-box">
+    <div class="sig-item">
+      <div class="name">Philip Obiri</div>
+      <div class="title">Lead Software Engineer</div>
+      <div class="title" style="font-size:11px;color:#94a3b8;font-style:italic;margin-top:2px">Telson Technologies</div>
+      <div class="title" style="margin-top:4px;font-size:12px">pobiriofficial@gmail.com &nbsp;|&nbsp; +233 550 049 921</div>
+      <div class="sig-field" style="margin-top:14px"><label>Full Name</label><div style="height:26px;visibility:hidden"></div></div>
+      <div class="sig-field" style="margin-top:10px"><label>Date</label><div style="height:26px;visibility:hidden"></div></div>
+      <div class="sig-check" style="visibility:hidden;min-height:44px"><label>I agree to all terms and conditions outlined in this proposal</label></div>
+    </div>
+    <div class="sig-item">
+      <div class="name">The RightWay Centre of Learning</div>
+      <div class="title">Director / Principal</div>
+      <div class="title" style="margin-top:4px">Trinidad &amp; Tobago</div>
+      <div class="sig-field" style="margin-top:14px"><label>Full Name</label><div style="height:26px;visibility:hidden"></div></div>
+      <div class="sig-field" style="margin-top:10px"><label>Date</label><div style="height:26px;visibility:hidden"></div></div>
+      <div class="sig-check" style="visibility:hidden;min-height:44px"><label>I agree to all terms and conditions outlined in this proposal</label></div>
+    </div>
+  </div>
+</div>
+
+<div class="doc-footer">
+  <div class="left"><strong>The RightWay Centre of Learning</strong> &mdash; Finance Suite Module</div>
+  <div class="center">HIGHLY CONFIDENTIAL &nbsp;&bull;&nbsp; REF: RW-FIN-2026-001 &nbsp;&bull;&nbsp; JUNE 2026</div>
+  <div class="right">TELSON TECHNOLOGIES</div>
+</div>
+</div>
+</body>
+</html>

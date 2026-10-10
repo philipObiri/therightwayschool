@@ -1,0 +1,58 @@
+import React from 'react';
+import api from '../../../lib/api';
+import { Button } from '../../../components/ui/button';
+import { Badge } from '../../../components/ui/badge';
+import { FolderOpen, FileText, Archive } from 'lucide-react';
+import { toast } from 'sonner';
+import { successToast } from '../../../lib/successToast';
+import { STATUS_COLORS, getFileConfig } from './wsConstants';
+
+function DocRows({ docs, setSelectedDoc }) {
+  return (
+    <div className="space-y-1">{docs.map(d => {
+      const fc = getFileConfig(d.file_type);
+      const FI = fc.icon;
+      return (
+        <div key={d.document_id} className="flex items-center gap-3 py-2.5 px-3 bg-white rounded-md border hover:border-[#2E6CC4]/30 cursor-pointer transition-colors"
+          onClick={async () => { try { const r = await api.get(`/wp/documents/${d.document_id}`); setSelectedDoc(r.data); } catch {} }}>
+          <div className={`w-8 h-8 ${fc.bg} rounded flex items-center justify-center shrink-0`}><FI className={`w-4 h-4 ${fc.color}`} /></div>
+          <div className="flex-1 min-w-0"><p className="text-sm font-medium truncate">{d.title}</p><p className="text-[10px] text-slate-400">{d.author_name} | v{d.version} | {d.file_type?.toUpperCase()}</p></div>
+          <Badge className={`text-[9px] shrink-0 ${STATUS_COLORS[d.status]}`}>{d.status}</Badge>
+          <span className="text-[10px] text-slate-400 shrink-0">{new Date(d.updated_at).toLocaleDateString()}</span>
+        </div>
+      );
+    })}</div>
+  );
+}
+
+export function DocListView({ activeTab, docList, isAdmin, setSelectedDoc, loadTabData, loadTree }) {
+  const isArchive = activeTab === 'archive';
+  if (isArchive && docList?.folders !== undefined) {
+    return (
+      <div className="space-y-4 animate-fade-in">
+        {docList.folders?.length > 0 && (
+          <div className="space-y-2">
+            <h3 className="text-xs font-semibold text-slate-500 uppercase">Archived Folders ({docList.folders.length})</h3>
+            {docList.folders.map(f => (
+              <div key={f.folder_id} className="flex items-center gap-3 py-2.5 px-3 bg-white rounded-md border">
+                <FolderOpen className="w-4 h-4 text-slate-400" /><span className="text-sm flex-1">{f.name}</span>
+                <span className="text-[10px] text-slate-400">{f.archived_at ? new Date(f.archived_at).toLocaleDateString() : ''}</span>
+                {isAdmin && <Button size="sm" variant="ghost" className="h-6 text-xs text-[#2E6CC4]"
+                  onClick={async () => { try { await api.put(`/wp/folders/${f.folder_id}/restore`); successToast('Restored'); loadTabData('archive'); loadTree(); } catch { toast.error('Failed'); } }}>Restore</Button>}
+              </div>
+            ))}
+          </div>
+        )}
+        {docList.documents?.length > 0 && (
+          <div className="space-y-2">
+            <h3 className="text-xs font-semibold text-slate-500 uppercase">Archived Documents ({docList.documents.length})</h3>
+            <DocRows docs={docList.documents} setSelectedDoc={setSelectedDoc} />
+          </div>
+        )}
+        {!docList.folders?.length && !docList.documents?.length && <div className="flex flex-col items-center py-16 text-slate-400"><Archive className="w-10 h-10 mb-2" /><p className="text-sm">No archived items</p></div>}
+      </div>
+    );
+  }
+  const docs = Array.isArray(docList) ? docList : [];
+  return docs.length > 0 ? <DocRows docs={docs} setSelectedDoc={setSelectedDoc} /> : <div className="flex flex-col items-center py-16 text-slate-400"><FileText className="w-10 h-10 mb-2" /><p className="text-sm">No documents found</p></div>;
+}

@@ -1,0 +1,67 @@
+{
+  "summary": "Iteration 48: Comprehensive testing of all PDF generation endpoints. All 24 backend tests PASSED (100%). PDF endpoints tested: Lecture PDFs (teacher/student/revision variants), Lesson PDFs, Scheme of Work PDFs, Finance Bill PDFs, Whole School Finance PDFs, Reconciliation PDFs, Finance Reports PDFs (overview/income-expense/department/outstanding), and Gradebook Report Card PDFs. All endpoints work with both ?token= query param (for browser tab viewing) and Bearer header authentication. Frontend verified: Lecture detail page has View PDF, Download, Student PDF buttons that correctly use ?token= format.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "TimetableWidget (TeacherDashboard)",
+        "issues": ["HTML hydration warnings: <th>/<td>/<tr> cannot be child of <span>. Known issue from previous iterations - doesn't affect functionality."]
+      }
+    ]
+  },
+  "passed_tests": [
+    "Backend: GET /api/lectures/{id}/export-pdf?token=X&variant=teacher returns valid PDF",
+    "Backend: GET /api/lectures/{id}/export-pdf?token=X&variant=student returns valid PDF",
+    "Backend: GET /api/lectures/{id}/export-pdf?token=X&variant=revision returns valid PDF",
+    "Backend: GET /api/lectures/{id}/export-pdf with Bearer header returns valid PDF",
+    "Backend: GET /api/lectures/{id}/export-pdf without auth returns 401",
+    "Backend: GET /api/lessons-v2/{id}/export-pdf?token=X returns valid PDF",
+    "Backend: GET /api/lessons-v2/{id}/export-pdf with Bearer header returns valid PDF",
+    "Backend: GET /api/schemes/{id}/export-pdf?token=X returns valid PDF",
+    "Backend: GET /api/schemes/{id}/export-pdf with Bearer header returns valid PDF",
+    "Backend: GET /api/schemes/{id}/export-pdf for empty scheme shows placeholder",
+    "Backend: GET /api/finance/bill/{id}/pdf?token=X returns valid PDF",
+    "Backend: GET /api/finance/bill/{id}/pdf with Bearer header returns valid PDF",
+    "Backend: GET /api/finance/report/whole-school-pdf?token=X returns valid PDF",
+    "Backend: GET /api/finance/report/whole-school-pdf with Bearer header returns valid PDF",
+    "Backend: GET /api/finance/reconciliation/pdf?token=X returns valid PDF",
+    "Backend: GET /api/finance/reconciliation/pdf with Bearer header returns valid PDF",
+    "Backend: GET /api/finance/reports/pdf/overview returns valid PDF",
+    "Backend: GET /api/finance/reports/pdf/income-expense returns valid PDF",
+    "Backend: GET /api/finance/reports/pdf/department returns valid PDF",
+    "Backend: GET /api/finance/reports/pdf/outstanding returns valid PDF",
+    "Backend: GET /api/gradebook/report-card/{student_id}/pdf?token=X returns valid PDF",
+    "Backend: GET /api/gradebook/report-card/{student_id}/pdf with Bearer header returns valid PDF",
+    "Frontend: GradebookPage.jsx uses ?token= (not ?auth=) for PDF URLs",
+    "Frontend: LectureModule.jsx uses token= for PDF URLs",
+    "Frontend: Lecture detail page has View PDF, Download, Student PDF buttons visible"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_pdf_endpoints.py",
+    "/app/test_reports/pytest/pytest_results_iter48.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "auth.py: Line 50-52 correctly checks request.query_params.get('token') for PDF viewing in browser tabs",
+    "All PDF endpoints properly support both ?token= query param and Bearer header authentication",
+    "Empty content handling in lesson/scheme PDF exports correctly shows placeholder instead of 400 error",
+    "Frontend correctly uses ?token= format for PDF URLs (not ?auth=)"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_pdf_endpoints.py"
+  ],
+  "success_rate": {
+    "backend": "100% (24/24 passed)",
+    "frontend": "100% (PDF buttons verified)"
+  },
+  "test_credentials": "Teacher: edmund@tcis.demo / teacher123, SuperAdmin: dwain@tcis.demo / admin123, Finance: finance@tcis.demo / finance123",
+  "seed_data_creation": "None - used existing lectures, lessons, schemes, invoices, and students",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 48 tested all PDF generation endpoints comprehensively. Key fix was adding request.query_params.get('token') to get_current_user() in auth.py (line 50-52), enabling all endpoints using Depends(get_current_user) to accept ?token= query param for browser tab PDF viewing. All 14 PDF endpoint types confirmed working: Lecture PDFs (3 variants), Lesson PDFs, Scheme PDFs, Finance Bill PDFs, Whole School Finance PDFs, Reconciliation PDFs, Finance Reports PDFs (4 types), and Gradebook Report Card PDFs. Test file: /app/backend/tests/test_pdf_endpoints.py"
+}

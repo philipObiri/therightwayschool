@@ -1,0 +1,108 @@
+{
+  "summary": "Iteration 34: Tested Scheme of Work module - a dual-sided workspace for Staff (teachers) and Management (admins). Fixed critical MongoDB _id serialization bug in create/upload endpoints. All 20 backend tests PASSED. All frontend features verified via Playwright.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Backend: GET /api/schemes/my-dashboard returns staff stats (total, term_schemes, drafts, submitted, returned, approved)",
+    "Backend: GET /api/schemes/ lists teacher's own schemes",
+    "Backend: POST /api/schemes/ creates new scheme with draft status",
+    "Backend: GET /api/schemes/{id} returns scheme with comments and audit_trail",
+    "Backend: PUT /api/schemes/{id} updates scheme content and changes status to in_progress",
+    "Backend: POST /api/schemes/{id}/submit submits scheme to management",
+    "Backend: POST /api/schemes/{id}/withdraw withdraws submitted scheme",
+    "Backend: GET /api/schemes/management-dashboard returns management stats",
+    "Backend: GET /api/schemes/management-dashboard returns 403 for teacher",
+    "Backend: GET /api/schemes/?status=all_submitted lists all non-draft schemes for management",
+    "Backend: POST /api/schemes/{id}/review with action=start_review changes status to under_review",
+    "Backend: POST /api/schemes/{id}/review with action=approve changes status to approved",
+    "Backend: POST /api/schemes/{id}/review with action=return changes status to returned",
+    "Backend: GET /api/schemes/management/compliance returns teacher compliance data",
+    "Backend: GET /api/schemes/management/compliance returns 403 for teacher",
+    "Backend: POST /api/schemes/{id}/comments adds comment to scheme",
+    "Backend: DELETE /api/schemes/{id} deletes draft scheme",
+    "Backend: DELETE /api/schemes/{id} returns 400 for approved scheme",
+    "Backend: POST /api/schemes/upload creates scheme with file_id",
+    "Frontend Staff: Dashboard shows stats cards (Total, This Term, Drafts, Submitted, Returned, Approved)",
+    "Frontend Staff: Create New and Upload buttons visible",
+    "Frontend Staff: Filter buttons (All, Drafts, Pending, Returned, Approved) work",
+    "Frontend Staff: Create scheme form with title, subject, year group, term, curriculum, department",
+    "Frontend Staff: Scheme editor with rich text editor, tabs (Editor, Comments, History)",
+    "Frontend Staff: AI Assistant panel with 7 AI action buttons + custom command",
+    "Frontend Staff: Save, Submit, Delete buttons in editor",
+    "Frontend Management: Dashboard shows stats (Total Submitted, Pending Review, Under Review, Approved, Returned)",
+    "Frontend Management: Tabs (Submissions, Compliance Tracker, Overdue Staff) work",
+    "Frontend Management: Submissions table with Staff, Subject/Class, Term, Status, Submitted, AI, Action columns",
+    "Frontend Management: Compliance Tracker shows teacher compliance with progress bars",
+    "Frontend Management: Overdue Staff shows teachers who haven't submitted",
+    "Frontend Management: Review panel shows scheme content, comments, audit trail",
+    "Frontend Management: Approve/Return/Publish buttons in review panel"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_scheme_of_work.py",
+    "/app/test_reports/pytest/pytest_results_iter34.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "FIXED: MongoDB _id serialization bug - insert_one() adds _id to doc dict, causing JSON serialization error. Fixed by calling doc.pop('_id', None) before returning",
+    "FIXED: Duplicate key error - removed _id: None from insert_one() calls which caused E11000 duplicate key errors",
+    "FIXED: Removed unnecessary update_many() calls to unset _id after insert"
+  ],
+  "updated_files": [
+    "/app/backend/routes/schemes.py (fixed _id handling in create_scheme, upload_scheme, log_scheme_action, add_comment, review_scheme)",
+    "/app/backend/tests/test_scheme_of_work.py (new test file with 20 tests)"
+  ],
+  "success_rate": {
+    "backend": "100% (20/20 tests passed)",
+    "frontend": "100% (all UI features verified)"
+  },
+  "test_credentials": {
+    "Teacher": "edmund@tcis.demo / teacher123",
+    "SuperAdmin": "dwain@tcis.demo / admin123"
+  },
+  "seed_data_creation": "Test schemes created and cleaned up during testing",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 34 tested the new Scheme of Work module. Key data-testids: scheme-staff-view, scheme-mgmt-view, create-scheme-btn, upload-scheme-btn, scheme-title-input, scheme-subject, submit-create-scheme, scheme-editor, toggle-ai, ai-panel, ai-improve, ai-standardise, ai-expand, ai-objectives, ai-assessment, ai-gaps, ai-digitalize, ai-custom, save-scheme, submit-scheme, back-from-editor, mgmt-search, mgmt-review-panel, review-comment, start-review, approve-scheme, return-scheme, publish-scheme. Status flow: draft -> in_progress -> submitted -> under_review -> approved/returned -> published. AI integration uses emergentintegrations with gemini-2.0-flash.",
+  "verified_features": {
+    "staff_dashboard": {
+      "stats_cards": ["Total", "This Term", "Drafts", "Submitted", "Returned", "Approved"],
+      "actions": ["Create New", "Upload"],
+      "filters": ["All", "Drafts", "Pending", "Returned", "Approved"]
+    },
+    "scheme_editor": {
+      "tabs": ["Editor", "Comments", "History"],
+      "actions": ["Save", "AI Assistant", "Submit", "Delete", "Withdraw"]
+    },
+    "ai_assistant": {
+      "buttons": ["Improve All", "TCIS Standard", "Expand Weak", "Fix Objectives", "Add Assessments", "Find Gaps", "Table Format"],
+      "custom_command": true
+    },
+    "management_dashboard": {
+      "stats_cards": ["Total Submitted", "Pending Review", "Under Review", "Approved", "Returned"],
+      "tabs": ["Submissions", "Compliance Tracker", "Overdue Staff"]
+    },
+    "management_review": {
+      "tabs": ["Scheme Content", "Comments", "Audit Trail"],
+      "actions": ["Start Review", "Approve", "Return", "Publish", "Archive"]
+    }
+  },
+  "bugs_fixed": [
+    {
+      "description": "MongoDB _id serialization error - ObjectId not JSON serializable",
+      "file": "/app/backend/routes/schemes.py",
+      "fix": "Added doc.pop('_id', None) after insert_one() to remove MongoDB-added _id before returning"
+    },
+    {
+      "description": "E11000 duplicate key error on _id: null",
+      "file": "/app/backend/routes/schemes.py",
+      "fix": "Removed _id: None from insert_one() calls and removed unnecessary update_many() to unset _id"
+    }
+  ]
+}

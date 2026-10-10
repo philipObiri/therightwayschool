@@ -1,0 +1,63 @@
+{
+  "summary": "Iteration 44: Comprehensive testing of 4-step hierarchical approval chain for Lessons and Schemes of Work. All 13 backend tests PASSED. The approval chain enforces: HeadOfAcademics (Step 1) -> Principal (Step 2) -> CEO (Step 3) -> Founder (Step 4). CRITICAL BUG FIX VERIFIED: CEO (who holds HeadOfAcademics role) is correctly blocked from approving at Step 1 and can only approve at Step 3 (their highest step in the chain).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "TimetableWidget",
+        "issues": ["HTML hydration warnings: <th>/<td>/<tr> cannot be child of <span>. This is a React rendering issue but doesn't affect functionality."]
+      }
+    ]
+  },
+  "passed_tests": [
+    "Backend: Teacher creates lesson (POST /api/lessons-v2/) - status 200, returns draft",
+    "Backend: Teacher submits lesson (POST /api/lessons-v2/{id}/submit) - creates 4-step approval chain",
+    "Backend: HeadTeacher sees submitted lesson in my-pending-reviews at Step 1",
+    "Backend: CEO does NOT see lesson at Step 1 (chain-aware role enforcement)",
+    "Backend: CEO cannot approve at Step 1 - returns 403 Forbidden",
+    "Backend: HeadTeacher approves Step 1 - lesson moves to Principal (Step 2)",
+    "Backend: CEO still cannot approve at Step 2 - returns 403",
+    "Backend: Principal approves Step 2 - lesson moves to CEO (Step 3)",
+    "Backend: CEO can now see lesson in my-pending-reviews at Step 3",
+    "Backend: CEO approves Step 3 - lesson moves to Founder (Step 4)",
+    "Backend: Founder gives final approval - lesson status becomes 'approved'",
+    "Backend: HeadTeacher can return a lesson - status becomes 'returned'",
+    "Backend: Scheme of Work has identical approval chain flow",
+    "Backend: Scheme my-pending-reviews works correctly",
+    "Frontend: Teacher login and navigation to Lessons works",
+    "Frontend: Teacher can create and submit lessons",
+    "Frontend: ApprovalChainBadge shows colored dots (green=approved, gray=pending)",
+    "Frontend: HeadTeacher has 'Lesson Approvals' sidebar link",
+    "Frontend: Lesson Approvals page shows Pending/Approved/Returned counts"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_approval_chain_hierarchical.py",
+    "/app/test_reports/pytest/pytest_results_iter44.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "approval_chain.py: can_user_approve_step() now accepts optional 'chain' parameter for chain-aware role enforcement",
+    "lessons_v2.py: All callers of can_user_approve_step pass the chain parameter",
+    "schemes.py: Identical approval chain logic implemented",
+    "TeacherLessonsHub.jsx: ApprovalChainBadge and ApprovalChainDetail components render approval progress",
+    "ManagementView fetches my-pending-reviews and displays 'Pending Your Review' section",
+    "MGMT_ROLES includes all management roles: SuperAdmin, Admin, CEO, Principal, HeadTeacher, Founder, HeadOfAcademics"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_approval_chain_hierarchical.py"
+  ],
+  "success_rate": {
+    "backend": "100% (13/13 passed)",
+    "frontend": "100% (all features verified)"
+  },
+  "test_credentials": "Teacher: edmund@tcis.demo / teacher123, HeadTeacher: headteacher@tcis.demo / headteacher123, Principal: principal@tcis.demo / principal123, CEO: ceo@tcis.demo / ceo123, Founder: founder@tcis.demo / founder123",
+  "seed_data_creation": "Test lessons and schemes created and cleaned up during backend testing",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Hierarchical approval chain fully tested. Key files: /app/backend/routes/approval_chain.py (can_user_approve_step with chain-aware enforcement), /app/backend/routes/lessons_v2.py (lines 262-468 for approval endpoints), /app/backend/routes/schemes.py (lines 374-530 for scheme approval). Frontend: TeacherLessonsHub.jsx has ApprovalChainBadge (lines 39-51) and ApprovalChainDetail (lines 53-84) components. ManagementView (lines 965-1100) fetches my-pending-reviews and displays pending items. The 4-step chain is: HeadOfAcademics -> Principal -> CEO -> Founder. CEO holds HeadOfAcademics role but can only approve at Step 3."
+}

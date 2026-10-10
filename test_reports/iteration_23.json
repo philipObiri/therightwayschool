@@ -1,0 +1,112 @@
+{
+  "summary": "Completed testing of DELETE invoice feature in Student Billing. Backend: 9/9 tests passed (100%). Frontend: All UI features verified working correctly including delete button, confirmation dialog, balance update, and success toast.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Delete Invoice Dialog", "issues": ["Console warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent} - minor accessibility issue (same as previous iterations)"]}
+    ]
+  },
+  "passed_tests": [
+    "Backend: DELETE /api/finance/invoices/{invoice_id} deletes invoice successfully",
+    "Backend: DELETE restores unallocated amounts on associated payments",
+    "Backend: DELETE recalculates student balance via recalc_student_balance",
+    "Backend: DELETE with invalid invoice_id returns 404",
+    "Backend: Teacher role cannot delete invoices (403 Forbidden)",
+    "Backend: DELETE removes all line items associated with invoice",
+    "Backend: DELETE removes all allocations associated with invoice",
+    "Backend: POST /api/finance/student/{id}/assign-term-fees creates invoice (replace functionality)",
+    "Backend: POST /api/finance/student/{id}/assign-term-fees updates existing invoice (replace functionality)",
+    "Frontend: Login as Finance Officer works",
+    "Frontend: Navigate to Finance > Student Billing tab works",
+    "Frontend: Click student row opens detail view with balance cards",
+    "Frontend: Delete button (trash icon) visible on each invoice row (data-testid='delete-inv-{invoice_id}')",
+    "Frontend: Edit button (pencil icon) visible on each invoice row (data-testid='edit-fees-{invoice_id}')",
+    "Frontend: Click delete button opens confirmation dialog",
+    "Frontend: Dialog shows invoice number and total amount",
+    "Frontend: Dialog warns about permanent removal of line items and allocations",
+    "Frontend: Dialog has Cancel and 'Delete Invoice' buttons (data-testid='confirm-delete-invoice')",
+    "Frontend: Click 'Delete Invoice' deletes the invoice",
+    "Frontend: After deletion, invoice removed from list immediately",
+    "Frontend: After deletion, balance card updates immediately (GHS 500 -> GHS 0)",
+    "Frontend: Success toast shows 'Invoice {invoice_number} deleted'"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_delete_invoice.py",
+    "/app/test_reports/pytest/pytest_results_iter23.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "DELETE endpoint correctly removes invoice, line items, and allocations in proper order",
+    "Payment unallocated amounts are properly restored when invoice is deleted",
+    "recalc_student_balance() is called after deletion to update student account",
+    "Frontend delete button has proper data-testid for testing (delete-inv-{invoice_id})",
+    "Confirmation dialog shows clear warning about what will be removed",
+    "Balance updates immediately after deletion without page refresh"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_delete_invoice.py"
+  ],
+  "success_rate": {
+    "backend": "100% (9/9 tests passed)",
+    "frontend": "100% (all UI features verified)"
+  },
+  "test_credentials": {
+    "Finance Officer": "finance@tcis.demo / finance123",
+    "Teacher (for 403 test)": "edmund@tcis.demo / teacher123"
+  },
+  "seed_data_creation": "Test invoices created and deleted during testing with TEST_ prefix. No persistent test data remains.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 23 DELETE invoice feature fully functional. Key endpoint: DELETE /api/finance/invoices/{invoice_id}. When deleted: removes invoice, line items, allocations; restores unallocated amounts on associated payments; recalcs student balance. UI: Student Billing tab > click student > invoice row has delete button (data-testid='delete-inv-{invoice_id}') and edit button (data-testid='edit-fees-{invoice_id}'). Confirmation dialog has data-testid='confirm-delete-invoice'. Edit/replace functionality via POST /api/finance/student/{id}/assign-term-fees still works.",
+  "features_verified": {
+    "delete_invoice_api": {
+      "endpoint": "DELETE /api/finance/invoices/{invoice_id}",
+      "response": {"message": "Invoice {invoice_number} deleted"},
+      "behavior": [
+        "Removes invoice document from invoices_v2 collection",
+        "Removes all line items from invoice_line_items collection",
+        "Removes all allocations from allocations collection",
+        "Restores unallocated_amount on associated payments",
+        "Sets payment status back to 'matched' if it had allocations",
+        "Calls recalc_student_balance() to update student account"
+      ],
+      "authorization": "Requires FinanceOfficer, SuperAdmin, or CEO role",
+      "error_handling": {
+        "404": "Invoice not found",
+        "403": "Insufficient permissions (e.g., Teacher role)"
+      }
+    },
+    "delete_invoice_ui": {
+      "delete_button": "data-testid='delete-inv-{invoice_id}' (red trash icon on invoice row)",
+      "edit_button": "data-testid='edit-fees-{invoice_id}' (blue pencil icon on invoice row)",
+      "confirmation_dialog": {
+        "title": "Delete Invoice",
+        "shows_invoice_number": true,
+        "shows_invoice_total": true,
+        "warning_items": [
+          "Invoice total: GHS {amount}",
+          "All fee line items on this invoice",
+          "All payment allocations to this invoice"
+        ],
+        "payment_warning": "Shows if invoice has payments: 'GHS {amount} in payments will be unallocated and available for re-allocation'",
+        "cancel_button": "Cancel",
+        "confirm_button": "data-testid='confirm-delete-invoice' (red 'Delete Invoice' button)"
+      },
+      "after_delete": {
+        "invoice_removed": "Invoice row removed from table immediately",
+        "balance_updated": "Balance card updates immediately",
+        "success_toast": "Invoice {invoice_number} deleted"
+      }
+    },
+    "replace_functionality": {
+      "method": "Edit existing fees via data-testid='edit-fees-{invoice_id}' or 'Assign / Edit Term Fees' button",
+      "api_endpoint": "POST /api/finance/student/{student_id}/assign-term-fees",
+      "behavior": "Updates existing invoice for same term instead of creating new one"
+    }
+  }
+}

@@ -1,0 +1,310 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Phase 5 &mdash; HR &amp; Administration | The RightWay Centre of Learning</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f0f4f8;font-family:'DM Sans',sans-serif;color:#1e293b}
+.page{max-width:794px;margin:0 auto;background:#fff;box-shadow:0 4px 32px rgba(0,0,0,.10)}
+.cover{background:linear-gradient(135deg,#044875 0%,#065d94 55%,#0a7ac4 100%);color:#fff;padding:90px 60px 70px;position:relative;min-height:420px}
+.cover-logo{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:42px}
+.phase-chip{display:inline-block;background:rgba(248,217,4,.18);border:1.5px solid #f8d904;color:#f8d904;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:26px}
+.cover h1{font-family:'Outfit',sans-serif;font-size:34px;font-weight:800;line-height:1.2;margin-bottom:20px}
+.cover-sub{font-size:14px;opacity:.75;margin-bottom:44px}
+.cover-price{display:inline-block;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.3);border-radius:12px;padding:20px 34px;margin-bottom:36px}
+.cover-price .label{font-size:11px;opacity:.7;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.cover-price .amount{font-family:'Outfit',sans-serif;font-size:32px;font-weight:800;color:#f8d904}
+.referral-badge{display:flex;align-items:center;gap:10px;background:rgba(248,217,4,.1);border:1px solid rgba(248,217,4,.3);border-radius:8px;padding:14px 20px;margin-top:32px;font-size:12px;opacity:.9}
+.referral-badge .dot{width:8px;height:8px;background:#f8d904;border-radius:50%;flex-shrink:0}
+.section{padding:56px 60px;border-top:2px solid #e2e8f0}
+.section h2{font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#044875;margin-bottom:28px;display:flex;align-items:center;gap:8px}
+.section h2 .num{background:#044875;color:#fff;font-size:10px;padding:2px 7px;border-radius:4px}
+.section h3{font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;color:#1e293b;margin-bottom:24px}
+p{font-size:13.5px;line-height:1.82;color:#475569;margin-bottom:20px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px}
+.card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px;border-top:3px solid #044875}
+.card .icon{font-size:20px;margin-bottom:8px}
+.card h4{font-size:13px;font-weight:700;color:#1e293b;margin-bottom:4px}
+.card p{font-size:12px;color:#64748b;margin:0}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}
+thead tr{background:#044875;color:#fff}
+thead th{padding:10px 14px;text-align:left;font-weight:600;font-size:12px}
+tbody tr:nth-child(even){background:#f8fafc}
+tbody td{padding:9px 14px;color:#334155;border-bottom:1px solid #f0f4f8}
+.goodwill-box{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1.5px solid #f8d904;border-radius:12px;padding:28px 32px;margin-top:24px}
+.goodwill-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center;margin-bottom:14px}
+.goodwill-grid .col-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#92400e;margin-bottom:6px}
+.goodwill-grid .market{font-size:20px;color:#94a3b8;text-decoration:line-through;font-family:'Outfit',sans-serif;font-weight:700}
+.goodwill-grid .saving{font-size:20px;color:#16a34a;font-family:'Outfit',sans-serif;font-weight:700}
+.goodwill-grid .final{font-size:26px;color:#044875;font-family:'Outfit',sans-serif;font-weight:800}
+.goodwill-note{font-size:12px;color:#78350f;font-style:italic;text-align:center;border-top:1px solid #fde68a;padding-top:12px;margin-top:2px}
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:24px}
+.pay-card{background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:18px;text-align:center}
+.pay-card .milestone{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin-bottom:8px}
+.pay-card .amount{font-family:'Outfit',sans-serif;font-size:26px;font-weight:800;color:#044875;margin-bottom:4px}
+.pay-card .desc{font-size:12px;color:#64748b}
+.retainer-box{background:linear-gradient(135deg,#e8f4fb,#c1e5e6);border:1.5px solid #0a7ac4;border-radius:12px;padding:26px 30px;margin-top:24px}
+.retainer-box h4{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#044875;margin-bottom:10px}
+.retainer-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(10,122,196,.15);font-size:13px}
+.retainer-row:last-child{border-bottom:none;font-weight:700;color:#044875;padding-top:10px}
+.retainer-row .val{color:#044875;font-weight:600}
+.tl-grid{display:grid;gap:20px;margin-top:24px}
+.tl-item{display:flex;gap:16px;align-items:flex-start}
+.tl-dot{width:32px;height:32px;background:#044875;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px}
+.tl-content h4{font-size:13px;font-weight:700;color:#1e293b;margin-bottom:2px}
+.tl-content p{font-size:12px;color:#64748b;margin:0}
+.upgrade-box{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #16a34a;border-radius:12px;padding:26px 30px;margin-top:24px}
+.upgrade-box h4{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#15803d;margin-bottom:12px}
+.upgrade-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(22,163,74,.15);font-size:13px;color:#1e293b}
+.upgrade-row:last-child{border-bottom:none;font-weight:700;font-size:14px;padding-top:10px}
+.upgrade-row .price{color:#15803d;font-weight:700;font-family:'Outfit',sans-serif}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:14px}
+.list-box h4{font-size:13px;font-weight:700;color:#1e293b;margin-bottom:8px}
+.list-box ul{list-style:none;padding:0}
+.list-box ul li{font-size:12.5px;color:#475569;padding:4px 0;border-bottom:1px solid #f0f4f8;display:flex;gap:8px}
+.list-box ul li::before{content:"✓";color:#16a34a;font-weight:700;flex-shrink:0}
+.list-box ul li.no::before{content:"✗";color:#dc2626}
+.sig-box{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:20px}
+.sig-item{border-top:2px solid #e2e8f0;padding-top:14px}
+.sig-item .name{font-weight:700;font-size:14px;color:#1e293b;margin-bottom:2px}
+.sig-item .title{font-size:12px;color:#64748b}
+.sig-field{margin-top:12px}
+.sig-field label{display:block;font-size:11px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.sig-check{margin-top:12px;display:flex;align-items:center;gap:10px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;padding:10px 14px;min-height:44px}
+.sig-check label{font-size:12px;color:#475569;line-height:1.4}
+.doc-footer{background:#044875;color:#fff;padding:16px 60px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.doc-footer .left{font-size:11px;opacity:.8;flex:1}
+.doc-footer .left strong{color:#f8d904}
+.doc-footer .center{font-size:10px;opacity:.55;text-align:center;letter-spacing:.3px;flex:2}
+.doc-footer .right{font-size:11px;font-weight:700;letter-spacing:1px;color:#f8d904;flex:1;text-align:right}
+
+/* COST BREAKDOWN TABLE */
+.cost-breakdown{margin-top:24px;border:1.5px solid #e2e8f0;border-radius:10px;overflow:hidden}
+.cb-row{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid #f0f4f8;font-size:13px}
+.cb-row.prior{background:#fafafa}
+.cb-row.new-item{background:linear-gradient(90deg,#f0fdf4,#fff);border-left:3px solid #16a34a}
+.cb-row.cb-total{background:#044875;border-bottom:none;padding:14px 16px}
+.cb-row .cb-label{display:flex;align-items:center;gap:8px;color:#334155}
+.cb-row.prior .cb-label{color:#94a3b8}
+.cb-row.cb-total .cb-label{color:#fff;font-size:14px;font-weight:700}
+.cb-badge{font-size:10px;background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:20px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
+.cb-row .cb-price{font-family:'Outfit',sans-serif;font-weight:700;color:#044875}
+.cb-row.prior .cb-price{color:#94a3b8}
+.cb-row.cb-total .cb-price{color:#f8d904;font-size:16px}@media print{body{background:#fff}.page{max-width:100%;box-shadow:none}.cover{padding:60px 40px 40px}.section{padding:22px 50px;border-top:1px solid #f0f4f8}.card,.goodwill-box,.retainer-box,.upgrade-box,.pay-card,.tl-item,.sig-box{break-inside:avoid;page-break-inside:avoid}.cards,.two-col,.pay-grid{break-inside:avoid;page-break-inside:avoid}tr{break-inside:avoid;page-break-inside:avoid}h2,h3{break-after:avoid;page-break-after:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-logo">The RightWay Centre of Learning &mdash; Trinidad &amp; Tobago</div>
+  <div class="phase-chip">Phase 5 of 6</div>
+  <h1>HR &amp; Administration Management</h1>
+  <div class="cover-sub">Everything in Phase 4, plus a full HR suite and school administration system — staff management, procurement, inventory, and operational control, all built in.</div>
+  <div class="cover-price">
+    <div class="label">Phase 5 Investment</div>
+    <div class="amount">USD $27,000</div>
+  </div>
+  <div class="referral-badge">
+    <div class="dot"></div>
+    Goodwill discount applied &mdash; Referred by <strong>&nbsp;Prof. Elvis Cornerstone</strong>
+  </div>
+</div>
+
+<!-- S01: WHY THIS PHASE -->
+<div class="section">
+  <h2><span class="num">01</span> Why This Phase</h2>
+  <h3>Your staff deserve a system that works as hard as they do.</h3>
+  <p>Running a school involves more than teaching — it demands precision in how you manage your people, your assets, and your administrative operations. Without a dedicated system, HR decisions happen on spreadsheets, leave requests travel by text message, and procurement has no verifiable paper trail.</p>
+  <p>Phase 5 gives The RightWay Centre of Learning a complete HR and administration engine — from the moment a staff member clocks in, to the moment a purchase order is approved and goods are received, every step is tracked, recorded, and reportable.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">👥</div>
+      <h4>HR Management</h4>
+      <p>Staff profiles, clock-in/out, leave requests, CPD tracking, performance reviews, and behaviour incident management with 4 severity levels.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📦</div>
+      <h4>Procurement &amp; Inventory</h4>
+      <p>Purchase orders, vendor management, approval workflows, asset registry, stock tracking, and requisitions — all with full audit trails.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🏢</div>
+      <h4>Office &amp; Reception</h4>
+      <p>Visitor log, parent communication records, meeting scheduling, duty roster, and administrative reporting — centralised in one place.</p>
+    </div>
+  </div>
+</div>
+
+<!-- S02: WHAT'S INCLUDED -->
+<div class="section">
+  <h2><span class="num">02</span> What's Included</h2>
+  <h3>Everything in Phase 4, plus a complete HR and administration suite.</h3>
+  <table>
+    <thead><tr><th>Module</th><th>Features Added in Phase 5</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Everything from Phase 4</strong></td><td>7-page website, CMS, admissions form, full LMS (Admin, Teacher, Learner, Parent portals), complete finance suite, payroll, accounting, bank reconciliation</td></tr>
+      <tr><td><strong>Staff Profiles</strong></td><td>Full staff directory, qualifications, certifications, emergency contacts, document storage, contract details per staff member</td></tr>
+      <tr><td><strong>Clock-In / Clock-Out</strong></td><td>Digital attendance tracking, late arrival flags, early departure records, daily and monthly attendance reports per staff member</td></tr>
+      <tr><td><strong>Leave Management</strong></td><td>Annual, sick, and casual leave requests; multi-level approval workflow; leave balance tracking; shared leave calendar view</td></tr>
+      <tr><td><strong>Behaviour Incidents</strong></td><td>4 severity levels — Minor, Moderate, Major, Critical; escalation workflow; incident log and history per staff member; principal sign-off</td></tr>
+      <tr><td><strong>CPD Tracking</strong></td><td>Continuing Professional Development course log, completion records, CPD hour totals per staff member, certificate storage</td></tr>
+      <tr><td><strong>Performance Reviews</strong></td><td>Quarterly and annual review cycles, goal-setting, ratings, review history, self-assessment, principal sign-off workflow</td></tr>
+      <tr><td><strong>Procurement</strong></td><td>Purchase order creation and management, vendor registry, multi-level approval workflow, PO status tracking, delivery confirmation</td></tr>
+      <tr><td><strong>Inventory Management</strong></td><td>Asset registry, stock level monitoring, low-stock alerts, staff requisitions, item check-out/return logs, disposal records</td></tr>
+      <tr><td><strong>Reception &amp; Administration</strong></td><td>Visitor log with sign-in/out, parent communication records, meeting scheduling, staff duty roster, administrative compliance reports</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- S03: INVESTMENT -->
+<div class="section">
+  <h2><span class="num">03</span> Investment</h2>
+  <h3>Complete HR and administration control — for less than BambooHR charges per year.</h3>
+  <div class="goodwill-box">
+    <div class="goodwill-grid">
+      <div><div class="col-label">Market Rate</div><div class="market">$54,000</div></div>
+      <div><div class="col-label">Goodwill Saving</div><div class="saving">- $27,000</div></div>
+      <div><div class="col-label">Your Price</div><div class="final">$27,000</div></div>
+    </div>
+    <div class="goodwill-note">This discount is applied as a gesture of goodwill in recognition of the referral by <strong>Prof. Elvis Cornerstone</strong>. It is exclusive to The RightWay Centre of Learning and cannot be transferred.</div>
+  </div>
+  <h4 style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#044875;margin-top:28px;margin-bottom:10px">What You're Paying For</h4>
+  <div class="cost-breakdown">
+    <div class="cb-row prior"><div class="cb-label">Professional Website (Phase 1)</div><div class="cb-price">$2,000</div></div>
+    <div class="cb-row prior"><div class="cb-label">Full LMS Platform (Phase 2)</div><div class="cb-price">$14,000</div></div>
+    <div class="cb-row prior"><div class="cb-label">Complete Finance Suite (Phase 4)</div><div class="cb-price">$7,000</div></div>
+    <div class="cb-row new-item"><div class="cb-label">HR &amp; Administration <span class="cb-badge">NEW IN PHASE 5</span></div><div class="cb-price">$4,000</div></div>
+    <div class="cb-row cb-total"><div class="cb-label">Phase 5 Total</div><div class="cb-price">$27,000</div></div>
+  </div>
+</div>
+
+<!-- S04: PAYMENT SCHEDULE -->
+<div class="section">
+  <h2><span class="num">04</span> Payment Schedule</h2>
+  <h3>Two milestones across 13 weeks.</h3>
+  <div class="pay-grid">
+    <div class="pay-card">
+      <div class="milestone">Milestone 1 &mdash; On Signing</div>
+      <div class="amount">$13,500</div>
+      <div class="desc">USD $13,500 &mdash; covers infrastructure, website, LMS build, finance suite, and HR module development.</div>
+    </div>
+    <div class="pay-card">
+      <div class="milestone">Milestone 2 &mdash; On Delivery</div>
+      <div class="amount">$13,500</div>
+      <div class="desc">USD $13,500 &mdash; paid when the full platform including all HR and administration modules is deployed and approved.</div>
+    </div>
+  </div>
+  <div style="margin-top:20px">
+    <h3 style="margin-bottom:6px">After delivery &mdash; Monthly Partnership</h3>
+    <div class="retainer-box">
+      <h4>Monthly Retainer &mdash; $450 / month</h4>
+      <div class="retainer-row"><span>Bug fixes &amp; priority support (24hr response)</span><span class="val">Included</span></div>
+      <div class="retainer-row"><span>10 hours of new feature development per month</span><span class="val">Included</span></div>
+      <div class="retainer-row"><span>Quarterly feature planning session</span><span class="val">Included</span></div>
+      <div class="retainer-row"><span>VPS hosting (Namecheap Magnetar)</span><span class="val">$24.88/mo</span></div>
+      <div class="retainer-row"><span><strong>Total monthly cost</strong></span><span class="val"><strong>~$475/mo</strong></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- S05: TIMELINE -->
+<div class="section">
+  <h2><span class="num">05</span> Delivery Timeline &mdash; 13 Weeks</h2>
+  <div class="tl-grid">
+    <div class="tl-item"><div class="tl-dot">W1</div><div class="tl-content"><h4>Week 1 &mdash; Website Live</h4><p>7-page website, CMS, digital admissions form, full SEO suite, and WhatsApp widget deployed.</p></div></div>
+    <div class="tl-item"><div class="tl-dot">W2</div><div class="tl-content"><h4>Week 2-4 &mdash; LMS Backend + Admin Portal</h4><p>FastAPI backend, MongoDB, authentication, admin portal, timetable generator, registries, and core academic management.</p></div></div>
+    <div class="tl-item"><div class="tl-dot">W5</div><div class="tl-content"><h4>Week 5-7 &mdash; Teacher, Learner &amp; Parent Portals</h4><p>All academic portals, gradebook, assignments, report cards, shared modules — fully deployed and tested.</p></div></div>
+    <div class="tl-item"><div class="tl-dot">W8</div><div class="tl-content"><h4>Week 8-9 &mdash; Finance Suite</h4><p>Chart of Accounts, General Ledger, financial statements, bank reconciliation, payroll, budgets, and petty cash.</p></div></div>
+    <div class="tl-item"><div class="tl-dot">W10</div><div class="tl-content"><h4>Week 10-12 &mdash; HR &amp; Administration Modules</h4><p>Staff profiles, clock-in/out, leave management, behaviour incidents, CPD, performance reviews, procurement, inventory, and reception management.</p></div></div>
+    <div class="tl-item"><div class="tl-dot">W13</div><div class="tl-content"><h4>Week 13 &mdash; UAT, Training &amp; Handover</h4><p>Full user acceptance testing across all portals, HR staff training (2 hrs), admin operations training (1 hr), official go-live.</p></div></div>
+  </div>
+</div>
+
+<!-- S06: UPGRADE PATH -->
+<div class="section">
+  <h2><span class="num">06</span> The Complete Platform</h2>
+  <h3>Ready for everything? Phase 5 bundles all modules — and saves you $3,000.</h3>
+  <div class="upgrade-box">
+    <h4>Upgrade to Complete Platform (Phase 5) — pay the difference</h4>
+    <div class="upgrade-row"><span>Website Module (Phase 1)</span><span class="price">included</span></div>
+    <div class="upgrade-row"><span>LMS Platform (Phase 2)</span><span class="price">included</span></div>
+    <div class="upgrade-row"><span>Finance Suite (Phase 3)</span><span class="price">included</span></div>
+    <div class="upgrade-row"><span>HR &amp; Administration (Phase 4 — this proposal)</span><span class="price">included</span></div>
+    <div class="upgrade-row"><span>🎁 Bonus: Second full website (7 pages + CMS)</span><span class="price">FREE</span></div>
+    <div class="upgrade-row"><span><strong>Complete Platform total (save $3,000 vs buying separately)</strong></span><span class="price">$25,000</span></div>
+  </div>
+</div>
+
+<!-- S07: TERMS -->
+<div class="section">
+  <h2><span class="num">07</span> Inclusions, Exclusions &amp; Terms</h2>
+  <div class="two-col">
+    <div class="list-box">
+      <h4>What's Included</h4>
+      <ul>
+        <li>All of Phase 4 (website + LMS + full finance)</li>
+        <li>Full HR module (leave, CPD, performance, incidents)</li>
+        <li>Staff clock-in/out and attendance reporting</li>
+        <li>Procurement + purchase order workflow</li>
+        <li>Inventory + asset management</li>
+        <li>Reception, visitor log, admin reports</li>
+        <li>HR staff training (2 hours, remote)</li>
+        <li>Admin team training (1 hour, remote)</li>
+        <li>30-day post-launch support included</li>
+      </ul>
+    </div>
+    <div class="list-box">
+      <h4>Not Included</h4>
+      <ul>
+        <li class="no">Domain purchase (client responsibility)</li>
+        <li class="no">VPS hosting — Quasar $154/yr or Magnetar $296/yr (client-billed direct)</li>
+        <li class="no">WiPay transaction fees</li>
+        <li class="no">Tax filing / audit services</li>
+        <li class="no">Learner or financial data migration</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:16px;font-size:12px;color:#94a3b8">Confidential — prepared exclusively for The RightWay Centre of Learning. Pricing valid until <strong>31 July 2026</strong>. Scope changes after sign-off will be quoted separately.</p>
+</div>
+
+<!-- S08: ACCEPTANCE -->
+<div class="section">
+  <h2><span class="num">08</span> Proposal Acceptance</h2>
+  <h3>One platform to manage your school — people, operations, and learning.</h3>
+  <div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:16px 20px;margin-bottom:20px;font-size:13px;color:#475569">
+    By signing below, both parties agree to the scope, payment schedule, and terms in this proposal. Work begins upon receipt of the first milestone payment of <strong>$13,500 USD</strong>.
+  </div>
+  <div class="sig-box">
+    <div class="sig-item">
+      <div class="name">Philip Obiri</div>
+      <div class="title">Lead Software Engineer</div>
+      <div class="title" style="font-size:11px;color:#94a3b8;font-style:italic;margin-top:2px">Telson Technologies</div>
+      <div class="title" style="margin-top:4px;font-size:12px">pobiriofficial@gmail.com &nbsp;|&nbsp; +233 550 049 921</div>
+      <div class="sig-field" style="margin-top:14px"><label>Full Name</label><div style="height:26px;visibility:hidden"></div></div>
+      <div class="sig-field" style="margin-top:10px"><label>Date</label><div style="height:26px;visibility:hidden"></div></div>
+      <div class="sig-check" style="visibility:hidden;min-height:44px"><label>I agree to all terms and conditions outlined in this proposal</label></div>
+    </div>
+    <div class="sig-item">
+      <div class="name">The RightWay Centre of Learning</div>
+      <div class="title">Director / Principal</div>
+      <div class="title" style="margin-top:4px">Trinidad &amp; Tobago</div>
+      <div class="sig-field" style="margin-top:14px"><label>Full Name</label><div style="height:26px;visibility:hidden"></div></div>
+      <div class="sig-field" style="margin-top:10px"><label>Date</label><div style="height:26px;visibility:hidden"></div></div>
+      <div class="sig-check" style="visibility:hidden;min-height:44px"><label>I agree to all terms and conditions outlined in this proposal</label></div>
+    </div>
+  </div>
+</div>
+
+<div class="doc-footer">
+  <div class="left"><strong>The RightWay Centre of Learning</strong> &mdash; Phase 5: HR &amp; Administration</div>
+  <div class="center">HIGHLY CONFIDENTIAL &nbsp;&bull;&nbsp; REF: RW-P5-2026-001 &nbsp;&bull;&nbsp; MAY 2026</div>
+  <div class="right">TELSON TECHNOLOGIES</div>
+</div>
+</div>
+</body>
+</html>

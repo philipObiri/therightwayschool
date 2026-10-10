@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem \"c:\\\\Users\\\\TeslaTelson\\\\OneDrive\\\\Desktop\\\\Entreprise\\\\Trinidad\" -Recurse -Depth 2)",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\TeslaTelson\\\\OneDrive\\\\Desktop\\\\Entreprise\\\\Trinidad\\\\backend\" -Recurse -Force)",
+      "Bash(Select-Object FullName)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\TeslaTelson\\\\OneDrive\\\\Desktop\\\\Entreprise\\\\Trinidad\\\\frontend\" -Force)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\TeslaTelson\\\\OneDrive\\\\Desktop\\\\Entreprise\\\\Trinidad\\\\frontend\\\\src\\\\pages\" -Recurse -Force | Where-Object {$_.Extension -match '\\\\.jsx?$'} | Select-Object FullName | Sort-Object FullName)",
+      "Bash(Get-ChildItem -Path \"routes\" -Filter \"*.py\")",
+      "Bash(Measure-Object)",
+      "Bash(Select-Object Count)",
+      "PowerShell(Remove-Item \"c:\\\\Users\\\\TeslaTelson\\\\OneDrive\\\\Desktop\\\\Entreprise\\\\Trinidad\\\\.emergent\" -Recurse -Force -Confirm:$false)",
+      "PowerShell(Move-Item \"c:\\\\Users\\\\TeslaTelson\\\\OneDrive\\\\Desktop\\\\Entreprise\\\\Trinidad\\\\backend_test.py\" \"c:\\\\Users\\\\TeslaTelson\\\\OneDrive\\\\Desktop\\\\Entreprise\\\\Trinidad\\\\tests\\\\backend_test.py\" -Force)",
+      "PowerShell(Move-Item \"c:\\\\Users\\\\TeslaTelson\\\\OneDrive\\\\Desktop\\\\Entreprise\\\\Trinidad\\\\finance_backend_test.py\" \"c:\\\\Users\\\\TeslaTelson\\\\OneDrive\\\\Desktop\\\\Entreprise\\\\Trinidad\\\\tests\\\\finance_backend_test.py\" -Force)",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\TeslaTelson\\\\OneDrive\\\\Desktop\\\\Entreprise\\\\Trinidad\\\\documentation\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\TeslaTelson\\\\OneDrive\\\\Desktop\\\\Entreprise\\\\Trinidad\\\\scripts\")",
+      "Bash(xargs sed -i 's/tcis_token/rw_token/g')",
+      "Bash(xargs sed -i 's/process\\\\.env\\\\.REACT_APP_BACKEND_URL/import.meta.env.VITE_API_URL/g')",
+      "Bash(sed -i \"s|try { return JSON.parse\\(localStorage.getItem\\('tcis_auth'\\) || '{}'\\).token || ''; } catch { return ''; }|return localStorage.getItem\\('rw_token'\\) \\\\|\\\\| '';|g\" pages/parent/ParentPortal.jsx)",
+      "Bash(sed -i \"s|try { const d = JSON.parse\\(localStorage.getItem\\('tcis_auth'\\) || '{}'\\); return d.token || ''; } catch { return ''; }|return localStorage.getItem\\('rw_token'\\) \\\\|\\\\| '';|g\" pages/parent/ParentReception.jsx pages/receptionist/ParentCommunication.jsx pages/receptionist/UniformBilling.jsx)"
+    ]
+  }
+}

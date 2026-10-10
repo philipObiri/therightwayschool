@@ -1,0 +1,73 @@
+{
+  "summary": "Iteration 31: Tested 2 bug fixes - (1) PDF/Document Viewer Fix VERIFIED WORKING - iframe with direct URL+token instead of blob, (2) Working Paper Owner Permissions VERIFIED WORKING - folder creators can see Permissions/Delete buttons on restricted/confidential folders. Also verified Staff Directory endpoint accessible to all authenticated users.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Backend: GET /api/wp/staff-directory returns staff list for teacher (non-admin)",
+    "Backend: GET /api/wp/staff-directory returns staff list for admin",
+    "Backend: Teacher can create restricted folder and is set as owner",
+    "Backend: Folder owner can access their restricted folder",
+    "Backend: Folder owner can delete their restricted folder",
+    "Backend: Folder owner can delete documents in their folder",
+    "Backend: Folder owner can set permissions on confidential folder",
+    "Backend: File preview endpoint accepts token parameter",
+    "Backend: Resources endpoint returns file_ids for viewing",
+    "Frontend: PDF Viewer uses iframe with direct URL (not blob)",
+    "Frontend: PDF Viewer URL includes ?token= parameter",
+    "Frontend: PDF Viewer has 'Open in New Tab' link",
+    "Frontend: PDF Viewer has 'Download' link",
+    "Frontend: PDF Viewer has 'Back to Resources' button",
+    "Frontend: Working Paper module loads correctly",
+    "Frontend: Teacher can create restricted folder",
+    "Frontend: Folder owner sees 'Permissions' button on restricted folder",
+    "Frontend: Folder owner sees 'Delete' button (trash icon) on restricted folder",
+    "Frontend: Folder owner sees 'Upload' button",
+    "Frontend: Folder owner sees 'Subfolder' button",
+    "Frontend: Folder owner sees 'Entry' button"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_iteration31.py",
+    "/app/test_reports/pytest/pytest_results_iter31.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "PDF viewing fix correctly uses direct URL with token auth instead of blob fetch - prevents 'failed to load pdf' errors",
+    "Working Paper owner permissions correctly check isOwner (currentFolder.owner_id === user.user_id) in addition to isAdmin",
+    "Staff directory endpoint correctly available to all authenticated users (not restricted to admin roles)",
+    "Backend DELETE /api/wp/documents/{doc_id} correctly allows folder owners to delete documents"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration31.py (new test file)"
+  ],
+  "success_rate": {
+    "backend": "100% (7/7 tests passed)",
+    "frontend": "100% (all UI features verified)"
+  },
+  "test_credentials": {
+    "Teacher": "edmund@tcis.demo / teacher123",
+    "SuperAdmin": "dwain@tcis.demo / admin123"
+  },
+  "seed_data_creation": "Created TEST_OwnerPerms folder during testing, cleaned up after tests",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 31 tested PDF viewing fix and Working Paper owner permissions. Both features working correctly. PDF viewer now uses direct URL with token auth (BACKEND/api/files/{id}/preview?token=JWT) in an iframe instead of blob fetch. Working Paper folder owners (not just admins) can see Permissions, Delete, Upload, Subfolder buttons on their folders regardless of classification (public/restricted/confidential). Staff directory endpoint GET /api/wp/staff-directory is available to all authenticated users.",
+  "verified_fixes": {
+    "pdf_viewing": {
+      "issue": "PDF/document viewer failed to load ('failed to load pdf')",
+      "fix": "Replaced blob-based approach with direct URL+token iframe viewer",
+      "verification": "Iframe src uses /api/files/{id}/preview?token= format, Open in New Tab and Download links present"
+    },
+    "working_paper_owner_permissions": {
+      "issue": "Folder creators couldn't see Permissions/Delete buttons on restricted/confidential folders",
+      "fix": "Added isOwner check (currentFolder.owner_id === user.user_id) to UI element visibility",
+      "verification": "Teacher created restricted folder and saw all owner buttons (Permissions, Delete, Upload, Subfolder, Entry)"
+    }
+  }
+}

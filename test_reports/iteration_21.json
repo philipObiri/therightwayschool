@@ -1,0 +1,127 @@
+{
+  "summary": "Completed testing of Finance Module Iteration 21 features: 1) Payment auto-allocation to unpaid invoices, 2) Three billing modes (Individual, Select Students, Entire Year Group), 3) Fully customizable fee item inputs, 4) Record Payment from Student Billing detail view. Backend: 22/22 tests passed (100%). Frontend: All UI features verified working correctly.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Record Payment Dialog", "issues": ["Console warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent} - minor accessibility issue (same as previous iterations)"]}
+    ]
+  },
+  "passed_tests": [
+    "Backend: POST /api/finance/quick-assign creates invoice + payment",
+    "Backend: POST /api/finance/quick-assign without payment (paid_amount=0)",
+    "Backend: POST /api/finance/quick-assign with invalid student returns 404",
+    "Backend: POST /api/finance/bill-selected-students bills specific students",
+    "Backend: POST /api/finance/bill-selected-students with empty list returns 400",
+    "Backend: POST /api/finance/bill-selected-students with no fee items returns 400",
+    "Backend: POST /api/finance/bill-selected-students skips already billed students",
+    "Backend: POST /api/finance/assign-fees-bulk bills entire year group",
+    "Backend: POST /api/finance/assign-fees-bulk applies boarding-specific fees",
+    "Backend: POST /api/finance/payments auto-allocates to oldest unpaid invoices",
+    "Backend: POST /api/finance/payments fully allocates when amount covers invoice",
+    "Backend: POST /api/finance/payments handles overpayment",
+    "Backend: GET /api/finance/student-profile/{id} shows balance",
+    "Backend: GET /api/finance/student-profile/{invalid_id} returns 404",
+    "Backend: GET /api/finance/student-profile includes invoices and payments",
+    "Backend: GET /api/finance/student-ledger returns all students with financial summary",
+    "Backend: GET /api/finance/student-ledger?year_group=Year 7 filters correctly",
+    "Backend: GET /api/finance/dashboard shows updated totals",
+    "Backend: GET /api/finance/invoices returns created invoices",
+    "Backend: GET /api/finance/payments returns recorded payments",
+    "Backend: Teacher role cannot access quick-assign (403)",
+    "Backend: CEO role can access billing endpoints",
+    "Frontend: Login as Finance Officer works",
+    "Frontend: Navigate to Finance > Assign Fees tab works",
+    "Frontend: Three mode buttons visible (Individual Student, Select Students, Entire Year Group)",
+    "Frontend: Individual Mode - student search input found (data-testid='student-search')",
+    "Frontend: Individual Mode - fee description input found (data-testid='fee-desc-input')",
+    "Frontend: Individual Mode - fee amount input found (data-testid='fee-amount-input')",
+    "Frontend: Individual Mode - paid amount input found (data-testid='paid-amount-input')",
+    "Frontend: Individual Mode - assign button found (data-testid='assign-individual-btn')",
+    "Frontend: Select Students Mode - Select All button found",
+    "Frontend: Select Students Mode - fee item name input found (data-testid='fee-item-name-0')",
+    "Frontend: Select Students Mode - fee item amount input found (data-testid='fee-item-amount-0')",
+    "Frontend: Select Students Mode - Bill Selected Students button found (data-testid='bill-selected-btn')",
+    "Frontend: Bulk Mode - Add Fee Item button found",
+    "Frontend: Bulk Mode - Assign Fees button found (data-testid='assign-fees-btn')",
+    "Frontend: Student Billing tab shows student list with Billed/Paid/Balance columns",
+    "Frontend: Student detail view shows Total Billed (data-testid='student-billed')",
+    "Frontend: Student detail view shows Total Paid (data-testid='student-paid')",
+    "Frontend: Student detail view shows Balance Owing (data-testid='student-balance')",
+    "Frontend: Record Payment button visible in student detail (data-testid='record-student-payment-btn')",
+    "Frontend: Record Payment dialog opens with amount input (data-testid='student-pay-amount')",
+    "Frontend: Record Payment dialog shows outstanding balance",
+    "Frontend: Record Payment dialog shows auto-allocation preview",
+    "Frontend: Submit payment button works (data-testid='submit-student-payment')",
+    "Frontend: After payment, balance decreases correctly (GHS 6,000 -> GHS 5,000 after GHS 1,000 payment)",
+    "Frontend: Invoice status updates to 'partial' after partial payment",
+    "Frontend: Success toast 'Payment recorded and allocated' appears",
+    "Frontend: Individual assign flow works - fee assigned with partial payment",
+    "Frontend: Success toast shows fee amount, paid amount, and balance"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_finance_billing_v2.py",
+    "/app/test_reports/pytest/pytest_results_iter21.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Payment auto-allocation correctly allocates to oldest unpaid invoices first (FIFO)",
+    "recalc_student_balance() properly updates invoice statuses (issued -> partial -> paid)",
+    "Three billing modes implemented with proper data-testid attributes for testing",
+    "Student detail view correctly shows real-time balance updates after payment",
+    "Fee items are fully customizable with name, category, amount, and applies_to fields"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_finance_billing_v2.py"
+  ],
+  "success_rate": {
+    "backend": "100% (22/22 tests passed)",
+    "frontend": "100% (all UI features verified)"
+  },
+  "test_credentials": {
+    "Finance Officer": "finance@tcis.demo / finance123",
+    "CEO": "ceo@tcis.demo / ceo123",
+    "SuperAdmin": "dwain@tcis.demo / admin123"
+  },
+  "seed_data_creation": "Test invoices and payments created during testing with TEST_ prefix. Student Akosua Kane Acheampong has GHS 6,000 invoice with GHS 1,000 paid (balance GHS 5,000). Student Ayeyi Forson has GHS 2,500 invoice with GHS 500 paid (balance GHS 2,000).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 21 finance billing features fully functional. Key endpoints: 1) POST /api/finance/quick-assign - individual student billing with optional payment, 2) POST /api/finance/bill-selected-students - multi-select billing with custom fee items, 3) POST /api/finance/assign-fees-bulk - entire year group billing, 4) POST /api/finance/payments - auto-allocates to oldest unpaid invoices. UI has three mode buttons in Assign Fees tab (data-testid='mode-individual', 'mode-selected', 'mode-bulk'). Student Billing tab shows student list with balance, clicking opens detail view with Record Payment button (data-testid='record-student-payment-btn').",
+  "features_verified": {
+    "payment_auto_allocation": {
+      "api_endpoint": "POST /api/finance/payments",
+      "behavior": "Auto-allocates payment to oldest unpaid invoices (FIFO)",
+      "updates": "Invoice status (issued->partial->paid), student balance via recalc_student_balance()",
+      "overpayment": "Creates credit note for overpayment amount"
+    },
+    "individual_billing_mode": {
+      "ui_button": "data-testid='mode-individual'",
+      "api_endpoint": "POST /api/finance/quick-assign",
+      "inputs": "student_id, fee_amount, paid_amount, description, term",
+      "ui_elements": "student-search, fee-desc-input, fee-amount-input, paid-amount-input, assign-individual-btn"
+    },
+    "select_students_mode": {
+      "ui_button": "data-testid='mode-selected'",
+      "api_endpoint": "POST /api/finance/bill-selected-students",
+      "inputs": "student_ids[], fee_items[], term, academic_year, due_date",
+      "ui_elements": "select-all-btn, fee-item-name-0, fee-item-amount-0, bill-selected-btn"
+    },
+    "bulk_year_group_mode": {
+      "ui_button": "data-testid='mode-bulk'",
+      "api_endpoint": "POST /api/finance/assign-fees-bulk",
+      "inputs": "year_group, term, academic_year, due_date, fee_items[]",
+      "ui_elements": "add-fee-item-btn, assign-fees-btn"
+    },
+    "student_billing_detail": {
+      "ui_tab": "data-testid='tab-billing'",
+      "api_endpoint": "GET /api/finance/student-profile/{student_id}",
+      "summary_elements": "student-billed, student-paid, student-balance",
+      "record_payment_btn": "data-testid='record-student-payment-btn'",
+      "payment_dialog": "student-pay-amount, submit-student-payment"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+import React, { useState, useCallback, useEffect } from 'react';
+import api from '../../../lib/api';
+import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Input } from '../../../components/ui/input';
+import { Badge } from '../../../components/ui/badge';
+import { Send, MessageSquare } from 'lucide-react';
+import { toast } from 'sonner';
+import { successToast } from '../../../lib/successToast';
+
+export function CommentsSection({ entityType, entityId }) {
+  const [comments, setComments] = useState([]);
+  const [text, setText] = useState('');
+
+  const load = useCallback(() => {
+    api.get(`/wp/comments/${entityType}/${entityId}`).then(r => setComments(r.data)).catch(() => {});
+  }, [entityType, entityId]);
+
+  useEffect(() => { load(); }, [load]);
+
+  const add = async () => {
+    if (!text.trim()) return;
+    try {
+      await api.post('/wp/comments', { entity_type: entityType, entity_id: entityId, text });
+      setText(''); load(); successToast('Comment added');
+    } catch { toast.error('Failed'); }
+  };
+
+  return (
+    <Card className="rounded-lg">
+      <CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><MessageSquare className="w-4 h-4" /> Comments ({comments.length})</CardTitle></CardHeader>
+      <CardContent className="space-y-3">
+        <div className="flex gap-2">
+          <Input placeholder="Write a comment..." value={text} onChange={e => setText(e.target.value)} onKeyDown={e => e.key === 'Enter' && add()} className="flex-1 text-sm" data-testid="comment-input" />
+          <Button size="sm" className="rounded-md bg-[#2E6CC4]" onClick={add} data-testid="add-comment-btn"><Send className="w-3 h-3" /></Button>
+        </div>
+        <div className="space-y-2 max-h-[300px] overflow-y-auto">
+          {comments.map(c => (
+            <div key={c.comment_id} className="bg-slate-50 rounded-md p-2.5">
+              <div className="flex items-center gap-2 mb-0.5">
+                <div className="w-5 h-5 rounded-full bg-[#1B2A4A] flex items-center justify-center text-white text-[8px] font-bold">{c.author_name?.charAt(0)}</div>
+                <span className="text-xs font-semibold">{c.author_name}</span>
+                <Badge variant="secondary" className="text-[8px]">{c.author_role}</Badge>
+                <span className="text-[10px] text-slate-400 ml-auto">{new Date(c.created_at).toLocaleString()}</span>
+              </div>
+              <p className="text-xs text-slate-600 ml-7">{c.text}</p>
+            </div>
+          ))}
+          {comments.length === 0 && <p className="text-xs text-slate-400 text-center py-3">No comments yet</p>}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}

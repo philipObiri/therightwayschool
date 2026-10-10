@@ -1,0 +1,66 @@
+{
+  "summary": "Iteration 39: Tested Math & Science Notation Preservation features. All 21 backend tests PASSED. Frontend UI verified: Scheme of Work page loads correctly with AI Enhanced schemes, editor opens with proper table styling, injectTableStyles adds vertical-align for sub/sup tags.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "Backend: clean_ai_html preserves <sub> tags (H₂O, CO₂)",
+    "Backend: clean_ai_html preserves <sup> tags (x², x³)",
+    "Backend: clean_ai_html preserves Unicode math symbols (π, √, ∑, ∫, ≤, ≥, ≠, ±, ×, ÷, °)",
+    "Backend: clean_ai_html preserves Unicode subscript/superscript chars (₂, ₁, ², ³, ⁸)",
+    "Backend: clean_ai_html does NOT convert single * to bold (a * b preserved)",
+    "Backend: clean_ai_html DOES convert ** to <strong> tags",
+    "Backend: clean_ai_html converts *** to <strong><em> tags",
+    "Backend: clean_ai_html preserves <code> tags",
+    "Backend: clean_ai_html preserves <var> tags",
+    "Backend: clean_ai_html preserves complex chemical formulas (H₂SO₄, Fe₂O₃)",
+    "Backend: clean_ai_html preserves E=mc² equation",
+    "Backend: clean_ai_html handles mixed math notation and markdown",
+    "Backend: Scheme PDF CSS includes sub/sup styles with vertical-align",
+    "Backend: Scheme AI prompts include MATH_RULE instructions",
+    "Backend: Quiz PDF uses DejaVu Unicode font (no latin-1 encoding)",
+    "Backend: Quiz AI prompts include MATH & SCIENCE NOTATION instructions",
+    "Backend: DejaVu font file exists at /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    "Frontend: injectTableStyles adds sub/sup inline styles",
+    "Frontend: schemeTableCSS includes sub/sup styling",
+    "Backend: Schemes endpoint accessible (200 OK)",
+    "Backend: Quiz list endpoint accessible (200 OK)",
+    "Frontend: Scheme of Work page loads with staff view",
+    "Frontend: Create New and Upload buttons visible",
+    "Frontend: AI Enhanced schemes display correctly",
+    "Frontend: Scheme editor opens with proper table styling",
+    "Frontend: AI Assistant, Download PDF, Edit Source buttons present"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_iteration39_math_notation.py",
+    "/app/test_reports/pytest/pytest_results_iter39.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "clean_ai_html uses null-byte protection keys to preserve <sub>, <sup>, <code>, <math>, <var> tags before markdown conversion",
+    "Single * is no longer converted to bold (was breaking a*b multiplication expressions)",
+    "Quiz PDF switched from Helvetica (latin-1 only) to DejaVu Sans (full Unicode support)",
+    "All .encode('latin-1','replace') calls removed from quiz.py",
+    "AI prompts (MCQ, Structured, Essay, Scheme digitize, Scheme analyze) include explicit math preservation instructions",
+    "PDF CSS for schemes includes sub { vertical-align: sub } and sup { vertical-align: super } styling",
+    "Frontend injectTableStyles adds inline styles for sub/sup tags to ensure proper rendering"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration39_math_notation.py"
+  ],
+  "success_rate": {
+    "backend": "100% (21/21 passed)",
+    "frontend": "100% (all features verified)"
+  },
+  "test_credentials": "Teacher: edmund@tcis.demo / teacher123",
+  "seed_data_creation": "None - used existing scheme data",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Math & Science Notation Preservation fully tested. Key functions: clean_ai_html in /app/backend/routes/schemes.py (lines 37-103), MATH_RULE in schemes.py (line 543-550), MCQ_SYSTEM_PROMPT in quiz.py (lines 23-49), DejaVu font registration in quiz.py (lines 457-460), injectTableStyles in SchemeOfWork.jsx (lines 304-312). All tests verify that mathematical formulas, subscripts, superscripts, and scientific notation are preserved across the platform."
+}

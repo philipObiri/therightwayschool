@@ -1,0 +1,78 @@
+import React from 'react';
+import { Button } from '../../../components/ui/button';
+import {
+  FolderOpen, FileText, Upload, ChevronRight, Shield,
+  LayoutGrid, List, PanelLeftClose, PanelLeft, Home, FolderPlus
+} from 'lucide-react';
+import { FolderTree } from './WsTreeNode';
+import { FolderContent, RootFolders } from './WsFolderContent';
+
+export function BrowseView(props) {
+  const { showTree, setShowTree, tree, currentFolder, openFolder, goHome, goBack,
+    viewMode, setViewMode, setFolderDialog, setDocDialog, setEntryDialog, setPermDialog,
+    isAdmin, loading, archiveFolder, deleteFolder, folders, seedDefaults, setSelectedDoc, user } = props;
+
+  return (
+    <div className="flex gap-0 bg-white rounded-lg border overflow-hidden" style={{ height: 'calc(100vh - 300px)', minHeight: '400px' }} data-testid="browse-view">
+      {showTree && <TreePanel tree={tree} activeId={currentFolder ? currentFolder.folder_id : ''} onSelect={openFolder} goHome={goHome} currentFolder={currentFolder} setShowTree={setShowTree} />}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <Toolbar showTree={showTree} setShowTree={setShowTree} currentFolder={currentFolder} openFolder={openFolder} goHome={goHome} viewMode={viewMode} setViewMode={setViewMode} setFolderDialog={setFolderDialog} setDocDialog={setDocDialog} setEntryDialog={setEntryDialog} setPermDialog={setPermDialog} isAdmin={isAdmin} />
+        <div className="flex-1 overflow-y-auto p-4">
+          {loading
+            ? <div className="flex justify-center py-16"><div className="w-8 h-8 border-4 border-[#2E6CC4] border-t-transparent rounded-full animate-spin" /></div>
+            : currentFolder
+              ? <FolderContent folder={currentFolder} viewMode={viewMode} openFolder={openFolder} goBack={goBack} isAdmin={isAdmin} archiveFolder={archiveFolder} deleteFolder={deleteFolder} setSelectedDoc={setSelectedDoc} user={user} />
+              : <RootFolders folders={folders} viewMode={viewMode} openFolder={openFolder} isAdmin={isAdmin} seedDefaults={seedDefaults} />
+          }
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TreePanel({ tree, activeId, onSelect, goHome, currentFolder, setShowTree }) {
+  return (
+    <div className="w-56 border-r bg-[#FAFBFC] shrink-0 flex flex-col" data-testid="folder-tree-panel">
+      <div className="p-2.5 border-b flex items-center justify-between">
+        <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Folders</span>
+        <button onClick={() => setShowTree(false)} className="text-slate-400 hover:text-slate-600"><PanelLeftClose className="w-3.5 h-3.5" /></button>
+      </div>
+      <div className="flex-1 overflow-y-auto p-1.5">
+        <button className={`flex items-center gap-1.5 w-full py-1.5 px-2 rounded-md text-xs mb-1 ${!currentFolder ? 'bg-[#2E6CC4]/10 text-[#2E6CC4] font-semibold' : 'text-slate-600 hover:bg-slate-100'}`} onClick={goHome}>
+          <Home className="w-3.5 h-3.5" /> All Folders
+        </button>
+        <FolderTree tree={tree} activeId={activeId} onSelect={onSelect} />
+      </div>
+    </div>
+  );
+}
+
+function Toolbar({ showTree, setShowTree, currentFolder, openFolder, goHome, viewMode, setViewMode, setFolderDialog, setDocDialog, setEntryDialog, setPermDialog, isAdmin }) {
+  const pathItems = currentFolder && currentFolder.path ? currentFolder.path : [];
+  return (
+    <div className="p-2.5 border-b flex items-center gap-2 bg-white shrink-0">
+      {!showTree && <button onClick={() => setShowTree(true)} className="text-slate-400 hover:text-slate-600 mr-1"><PanelLeft className="w-4 h-4" /></button>}
+      <div className="flex items-center gap-1 text-xs flex-1 min-w-0">
+        <button onClick={goHome} className="text-[#2E6CC4] hover:underline shrink-0">Home</button>
+        {pathItems.map(p => (
+          <React.Fragment key={p.folder_id}>
+            <ChevronRight className="w-3 h-3 text-slate-300 shrink-0" />
+            <button onClick={() => openFolder(p.folder_id)} className="text-[#2E6CC4] hover:underline truncate max-w-[120px]">{p.name}</button>
+          </React.Fragment>
+        ))}
+      </div>
+      <div className="flex items-center border rounded-md overflow-hidden shrink-0">
+        <button className={`p-1.5 ${viewMode === 'grid' ? 'bg-[#2E6CC4] text-white' : 'text-slate-400'}`} onClick={() => setViewMode('grid')} data-testid="grid-view-btn"><LayoutGrid className="w-3.5 h-3.5" /></button>
+        <button className={`p-1.5 ${viewMode === 'list' ? 'bg-[#2E6CC4] text-white' : 'text-slate-400'}`} onClick={() => setViewMode('list')} data-testid="list-view-btn"><List className="w-3.5 h-3.5" /></button>
+      </div>
+      {currentFolder && (
+        <div className="flex items-center gap-1 shrink-0">
+          <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={() => setFolderDialog(true)}><FolderPlus className="w-3 h-3 mr-1" /> Subfolder</Button>
+          <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={() => setDocDialog(true)}><Upload className="w-3 h-3 mr-1" /> Upload</Button>
+          <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={() => setEntryDialog(true)}><FileText className="w-3 h-3 mr-1" /> Entry</Button>
+          {isAdmin && <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={() => setPermDialog(true)}><Shield className="w-3 h-3 mr-1" /> Access</Button>}
+        </div>
+      )}
+    </div>
+  );
+}
